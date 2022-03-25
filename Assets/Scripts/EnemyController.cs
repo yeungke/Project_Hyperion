@@ -31,9 +31,8 @@ public class EnemyController : MonoBehaviour
 
         moveCount = moveTime;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void EnemyMovementUpdate()
     {
         if (moveCount > 0)
         {
@@ -60,14 +59,15 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if(moveCount<=0)
+            if (moveCount <= 0)
             {
                 waitCount = Random.Range(waitTime * 0.75f, waitTime * 1.25f);
             }
 
             anim.SetBool("isMoving", true);
 
-        } else if (waitCount > 0)
+        }
+        else if (waitCount > 0)
         {
             waitCount -= Time.deltaTime;
             rb.velocity = new Vector2(0f, rb.velocity.y);
@@ -79,5 +79,16 @@ public class EnemyController : MonoBehaviour
 
             anim.SetBool("isMoving", false);
         }
+    }
+
+    void EnemyAttack()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        EnemyMovementUpdate();
     }
 }
