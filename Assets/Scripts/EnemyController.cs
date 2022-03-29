@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int enemyHealth = 5;
+
     public float moveSpeed;
 
     public Transform leftPoint, rightPoint;
@@ -97,6 +99,15 @@ public class EnemyController : MonoBehaviour
     void EnemyAttack()
     {
 
+    }
+
+    void EnemyKilled()
+    {
+        if (enemyHealth == 0)
+        {
+            anim.SetTrigger("killed");
+            this.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame
