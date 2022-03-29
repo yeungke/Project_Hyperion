@@ -19,6 +19,9 @@ public class EnemyController : MonoBehaviour
     public float moveTime, waitTime;
     private float moveCount, waitCount;
 
+    private float nextActionTime = 0.0f;
+    public float period = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +37,11 @@ public class EnemyController : MonoBehaviour
     
     void EnemyMovementUpdate()
     {
+
         if (moveCount > 0)
         {
             moveCount -= Time.deltaTime;
+            
 
             if (movingRight)
             {
@@ -65,6 +70,14 @@ public class EnemyController : MonoBehaviour
             }
 
             anim.SetBool("isMoving", true);
+
+            if (Time.time > nextActionTime)
+            {
+                nextActionTime += period;
+                int random = Random.Range(0, 10);
+                if (random == 1)
+                    anim.SetTrigger("jumping");
+            }
 
         }
         else if (waitCount > 0)
