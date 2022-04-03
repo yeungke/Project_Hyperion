@@ -14,6 +14,7 @@ public class GameOverlay : View
     {
         _pauseButton.onClick.AddListener(() => ViewManager.Show<PauseMenu>());
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,6 @@ public class GameOverlay : View
     // Update is called once per frame
     void Update()
     {
-        
+        _lifeText.text = "Life: " + GameManager.LifeUIUpdate().ToString(); ;
     }
 }
