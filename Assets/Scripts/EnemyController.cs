@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int enemyHealth = 5;
+
     public float moveSpeed;
 
     public Transform leftPoint, rightPoint;
@@ -19,6 +21,9 @@ public class EnemyController : MonoBehaviour
     public float moveTime, waitTime;
     private float moveCount, waitCount;
 
+    private float nextActionTime = 0.0f;
+    public float period = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,13 +36,14 @@ public class EnemyController : MonoBehaviour
 
         moveCount = moveTime;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void EnemyMovementUpdate()
     {
+
         if (moveCount > 0)
         {
             moveCount -= Time.deltaTime;
+            
 
             if (movingRight)
             {
@@ -60,14 +66,23 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            if(moveCount<=0)
+            if (moveCount <= 0)
             {
                 waitCount = Random.Range(waitTime * 0.75f, waitTime * 1.25f);
             }
 
             anim.SetBool("isMoving", true);
 
-        } else if (waitCount > 0)
+            if (Time.time > nextActionTime)
+            {
+                nextActionTime += period;
+                int random = Random.Range(0, 10);
+                if (random == 1)
+                    anim.SetTrigger("jumping");
+            }
+
+        }
+        else if (waitCount > 0)
         {
             waitCount -= Time.deltaTime;
             rb.velocity = new Vector2(0f, rb.velocity.y);
@@ -79,5 +94,25 @@ public class EnemyController : MonoBehaviour
 
             anim.SetBool("isMoving", false);
         }
+    }
+
+    void EnemyAttack()
+    {
+
+    }
+
+    void EnemyKilled()
+    {
+        if (enemyHealth == 0)
+        {
+            anim.SetTrigger("killed");
+            this.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        EnemyMovementUpdate();
     }
 }
