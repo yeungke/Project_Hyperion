@@ -438,11 +438,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3602598696059814498, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
       propertyPath: canJump
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3602598696059814498, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
       propertyPath: canCrouch
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3602598696059814500, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
       propertyPath: m_Name

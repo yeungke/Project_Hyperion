@@ -12,6 +12,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Scene _prevScene;
 
 
+
+    //temp stuff for prototype demo
+    private GameObject[] _levelObjects;
+
     public static void LoadLevel(string s)
     {
         SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
@@ -43,12 +47,23 @@ public class LevelManager : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(_prevScene);
         }
-        else if (_currentScene != _globalScene)
+        /*else*/
+        if (_currentScene != _globalScene)
         {
             _prevScene = _currentScene;
         }
 
         SceneManager.SetActiveScene(_currentScene);
+
+
+        _levelObjects = _currentScene.GetRootGameObjects();
+        foreach (GameObject obj in _levelObjects)
+        {
+            if (obj.name == "Player")
+            {
+                GameManager.SetPlayer(obj);
+            }
+        }
     }
 
 

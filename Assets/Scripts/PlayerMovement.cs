@@ -27,6 +27,17 @@ public class PlayerMovement : MonoBehaviour
             crouch = false;
     }
 
+    public void SetJump(bool val)
+    {
+        canJump = val;
+    }
+
+
+    public void SetCrouch(bool val)
+    {
+        canCrouch = val;
+    }
+
     void MoveController()
     {
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
