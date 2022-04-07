@@ -22,6 +22,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         if (_parent != null)
         {
             _parent.GetComponent<ItemSlot>()?.SetOccupied(true);
+            _parent.GetComponent<ItemSlot>()?.SetOccupant(this.gameObject);
         }
     }
 
@@ -29,6 +30,8 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void Unequip()
     {
+
+        Debug.Log("Unequip Called");
         if (_upgradeSlot != null)
         {
             _upgradeSlot.GetComponent<ItemSlot>()?.SetOccupied(false);
@@ -38,11 +41,63 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void Equipped(GameObject obj)
     {
-        _upgradeSlot = obj;
+        if (_upgradeSlot != null)
+        {
+            _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
+            _upgradeSlot = obj;
+            Debug.Log("upgrade slot assigned");
+        }
+        else
+        {
+            _upgradeSlot = obj;
+            Debug.Log("upgrade slot assigned");
+        }
         if (_name != null)
         {
             GameManager.ToggleUpgrade(_name, true);
         }
+    }
+
+    public void CheckEquippedOrParent(GameObject obj)
+    {
+        Debug.Log("CheckEquippedOrParent Called");
+        /*if (_parent != null && _parent != obj)
+        {*/
+        if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "eqp") 
+        {
+            /*_parent.GetComponent<ItemSlot>()?.RemoveOccupant();
+            _parent = obj;*/
+
+            if (_upgradeSlot != null)
+            {
+                Debug.Log("dropped into upgrade slot");
+                _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
+                //_upgradeSlot = obj;
+                _upgradeSlot = obj;
+            }
+        }
+        if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "inv")
+        {
+            Debug.Log("dropped into iventory slot");
+            if (_upgradeSlot != null)
+            {
+                Debug.Log("upgradeSlot not null");
+                _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
+                //_upgradeSlot = obj;
+                _upgradeSlot = null;
+
+                Unequip();
+            }
+            if (_parent != null )
+            {
+                if (_parent != obj)
+                {
+                    _parent.GetComponent<ItemSlot>()?.RemoveOccupant();
+                }
+                _parent = obj;
+            }
+        }
+
     }
 
     public void ReturnToSlot()

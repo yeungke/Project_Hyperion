@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool canJump = false;
     [SerializeField] private bool canCrouch = false;
 
+
     void GetUserInput()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         canJump = val;
     }
+
 
 
     public void SetCrouch(bool val)
