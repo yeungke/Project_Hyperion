@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
@@ -15,10 +16,14 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     [SerializeField] private GameObject _parent;
     [SerializeField] private GameObject _upgradeSlot;
 
+    private GraphicRaycaster graphicRaycaster;
     private void Awake()
     {
         _position = this.GetComponent<RectTransform>();
         _group = this.GetComponent<CanvasGroup>();
+
+        graphicRaycaster = _canvas.GetComponent<GraphicRaycaster>();
+
         if (_parent != null)
         {
             _parent.GetComponent<ItemSlot>()?.SetOccupied(true);
@@ -31,7 +36,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     public void Unequip()
     {
 
-        Debug.Log("Unequip Called");
+        //Debug.Log("Unequip Called");
         if (_upgradeSlot != null)
         {
             _upgradeSlot.GetComponent<ItemSlot>()?.SetOccupied(false);
@@ -45,12 +50,12 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         {
             _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
             _upgradeSlot = obj;
-            Debug.Log("upgrade slot assigned");
+           // Debug.Log("upgrade slot assigned");
         }
         else
         {
             _upgradeSlot = obj;
-            Debug.Log("upgrade slot assigned");
+           // Debug.Log("upgrade slot assigned");
         }
         if (_name != null)
         {
@@ -60,7 +65,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void CheckEquippedOrParent(GameObject obj)
     {
-        Debug.Log("CheckEquippedOrParent Called");
+        //Debug.Log("CheckEquippedOrParent Called");
         /*if (_parent != null && _parent != obj)
         {*/
         if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "eqp") 
@@ -70,7 +75,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
             if (_upgradeSlot != null)
             {
-                Debug.Log("dropped into upgrade slot");
+                //Debug.Log("dropped into upgrade slot");
                 _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
                 //_upgradeSlot = obj;
                 _upgradeSlot = obj;
@@ -78,10 +83,10 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         }
         if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "inv")
         {
-            Debug.Log("dropped into iventory slot");
+            //Debug.Log("dropped into iventory slot");
             if (_upgradeSlot != null)
             {
-                Debug.Log("upgradeSlot not null");
+                //Debug.Log("upgradeSlot not null");
                 _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
                 //_upgradeSlot = obj;
                 _upgradeSlot = null;
@@ -109,7 +114,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         // Debug.Log("DragStart");
         _group.alpha = 0.5f;
-        _group.blocksRaycasts = false;
+       // _group.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -121,7 +126,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         // Debug.Log("Drag End");
         _group.alpha = 1f;
-        _group.blocksRaycasts = true;
+        //_group.blocksRaycasts = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -143,6 +148,40 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnDrop(PointerEventData eventData)
     {
-        
+        Debug.Log("Item OnDrop called");
+        bool placed = false;
+        var results = new List<RaycastResult>();
+        graphicRaycaster.Raycast(eventData, results);
+
+        foreach (var hit in results)
+        {
+            if (hit.gameObject.GetComponent<ItemSlot>() != null)
+            {
+                if (hit.gameObject.GetComponent<ItemSlot>().isOccupied() == false)
+                {
+                    CheckEquippedOrParent(hit.gameObject);
+                    hit.gameObject.GetComponent<ItemSlot>().SetOccupant(this.gameObject);
+                    this.GetComponent<RectTransform>().anchoredPosition = hit.gameObject.GetComponent<RectTransform>().anchoredPosition;
+                    placed = true;
+                }
+            }
+        }
+        if (placed == false)
+        {
+            if (_upgradeSlot != null)
+            {
+                if (this.GetComponent<RectTransform>().anchoredPosition != _upgradeSlot.GetComponent<RectTransform>().anchoredPosition)
+                {
+                    this.GetComponent<RectTransform>().anchoredPosition = _upgradeSlot.GetComponent<RectTransform>().anchoredPosition;
+                }
+            }
+            else if (_parent != null)
+            {
+                if (this.GetComponent<RectTransform>().anchoredPosition != _parent.GetComponent<RectTransform>().anchoredPosition)
+                {
+                    this.GetComponent<RectTransform>().anchoredPosition = _parent.GetComponent<RectTransform>().anchoredPosition;
+                }
+            }
+        }
     }
 }
