@@ -24,6 +24,14 @@ public class EnemyController : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float period = 1.0f;
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+/*        if (collision.CompareTag("Weapon"))
+        {
+            enemyHealth -= 1;
+        }*/
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,66 +47,71 @@ public class EnemyController : MonoBehaviour
     
     void EnemyMovementUpdate()
     {
-
-        if (moveCount > 0)
+        if (!anim.GetBool("isAttacking"))
         {
-            moveCount -= Time.deltaTime;
-            
-
-            if (movingRight)
+            if (moveCount > 0)
             {
-                rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-                sr.flipX = true;
+                moveCount -= Time.deltaTime;
 
-                if (transform.position.x > rightPoint.position.x)
+
+                if (movingRight)
                 {
-                    movingRight = false;
-                }
-            }
-            else
-            {
-                rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
-                sr.flipX = false;
+                    rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+                    sr.flipX = true;
 
-                if (transform.position.x < leftPoint.position.x)
+                    if (transform.position.x > rightPoint.position.x)
+                    {
+                        movingRight = false;
+                    }
+                }
+                else
                 {
-                    movingRight = true;
+                    rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+                    sr.flipX = false;
+
+                    if (transform.position.x < leftPoint.position.x)
+                    {
+                        movingRight = true;
+                    }
                 }
-            }
 
-            if (moveCount <= 0)
+                if (moveCount <= 0)
+                {
+                    waitCount = Random.Range(waitTime * 0.75f, waitTime * 1.25f);
+                }
+
+                anim.SetBool("isMoving", true);
+
+                if (Time.time > nextActionTime)
+                {
+                    nextActionTime += period;
+                    int random = Random.Range(0, 10);
+                    if (random == 1)
+                        anim.SetTrigger("jumping");
+                }
+
+            }
+            else if (waitCount > 0)
             {
-                waitCount = Random.Range(waitTime * 0.75f, waitTime * 1.25f);
+                waitCount -= Time.deltaTime;
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+
+                if (waitCount <= 0)
+                {
+                    moveCount = Random.Range(moveTime * 0.75f, moveTime * 1.25f);
+                }
+
+                anim.SetBool("isMoving", false);
             }
-
-            anim.SetBool("isMoving", true);
-
-            if (Time.time > nextActionTime)
-            {
-                nextActionTime += period;
-                int random = Random.Range(0, 10);
-                if (random == 1)
-                    anim.SetTrigger("jumping");
-            }
-
-        }
-        else if (waitCount > 0)
-        {
-            waitCount -= Time.deltaTime;
-            rb.velocity = new Vector2(0f, rb.velocity.y);
-
-            if (waitCount <= 0)
-            {
-                moveCount = Random.Range(moveTime * 0.75f, moveTime * 1.25f);
-            }
-
-            anim.SetBool("isMoving", false);
         }
     }
 
     void EnemyAttack()
     {
-
+        if (anim.GetBool("isAttacking"))
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
     }
 
     void EnemyKilled()
@@ -106,7 +119,8 @@ public class EnemyController : MonoBehaviour
         if (enemyHealth == 0)
         {
             anim.SetTrigger("killed");
-            this.transform.parent.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
+            //Destroy(this.gameObject, 0.8f);
         }
     }
 
@@ -114,5 +128,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         EnemyMovementUpdate();
+        EnemyAttack();
+        EnemyKilled();
     }
 }
