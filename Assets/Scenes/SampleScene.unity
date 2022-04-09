@@ -294,17 +294,45 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764648, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_Size.y
+      value: 0.120146185
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.014876321
+      objectReference: {fileID: 0}
     - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.4684167
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.1629346
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.11
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 8624241074144764649, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.15
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 8624241074144764662, guid: d755b63beb5f4fd4fb205cc21e2118e5, type: 3}
       propertyPath: m_LocalPosition.x
