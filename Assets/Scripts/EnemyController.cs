@@ -119,8 +119,7 @@ public class EnemyController : MonoBehaviour
         if (enemyHealth == 0)
         {
             anim.SetTrigger("killed");
-            //this.gameObject.SetActive(false);
-            //Destroy(this.gameObject, 0.8f);
+            GameManager._instance.EnemySlain();
         }
     }
 
