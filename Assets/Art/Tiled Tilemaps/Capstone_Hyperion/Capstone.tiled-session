@@ -79,8 +79,8 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 279.5,
-                "y": 126
+                "x": 255.75,
+                "y": 143.75
             }
         },
         "test_rules.tmx": {
@@ -100,7 +100,7 @@
             }
         }
     },
-    "last.imagePath": "F:/TILESETS/Capstone",
+    "last.imagePath": "F:/Unity Projects/capstone/Hyperion/Assets/Art/Tiled Tilemaps/Capstone_Hyperion/src",
     "map.fixedSize": true,
     "map.height": 64,
     "map.lastUsedFormat": "tmx",
