@@ -10,6 +10,7 @@ public class PauseMenu : View
 
     public override void Initialize()
     {
+        _resumeButton.onClick.AddListener(() => GameManager.Play());
         _resumeButton.onClick.AddListener(() => ViewManager.Show<GameOverlay>());
         _mainMenuButton.onClick.AddListener(() => LevelManager.ReturnToMenu());
         _mainMenuButton.onClick.AddListener(() => ViewManager.Show<MainMenu>());

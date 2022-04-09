@@ -13,6 +13,7 @@ public class GameOverlay : View
     public override void Initialize()
     {
         _pauseButton.onClick.AddListener(() => ViewManager.Show<PauseMenu>());
+        _pauseButton.onClick.AddListener(() => GameManager.Pause());
     }
 
     // Start is called before the first frame update
