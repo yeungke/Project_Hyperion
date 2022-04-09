@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
+    private static GameManager _instance;
 
     //
     [SerializeField] private int _life = 100;
@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
         _instance._numEnemies = count;
     }
 
-    public void EnemySlain()
+    public static void EnemySlain()
     {
-        _numEnemies -= 1;
+        _instance._numEnemies -= 1;
     }
 
     public static int GetNumEnemies()

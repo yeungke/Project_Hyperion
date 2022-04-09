@@ -119,7 +119,7 @@ public class EnemyController : MonoBehaviour
         if (enemyHealth == 0)
         {
             anim.SetTrigger("killed");
-            GameManager._instance.EnemySlain();
+            GameManager.EnemySlain();
         }
     }
 
