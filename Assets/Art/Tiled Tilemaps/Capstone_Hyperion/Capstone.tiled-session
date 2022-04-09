@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "prototype_tileset.tsx",
+    "activeFile": "test1.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "."
@@ -72,23 +72,23 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 1023.5,
-                "y": 511
+                "y": 511.5
             }
         },
         "test1.tmx": {
-            "scale": 1.5,
+            "scale": 5.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 370.3333333333333,
-                "y": 144
+                "x": 255.90909090909093,
+                "y": 143.90909090909093
             }
         },
         "test_rules.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 683.5,
-                "y": 373
+                "x": 511.5,
+                "y": 511.5
             }
         },
         "untitled.tmx": {
@@ -111,18 +111,17 @@
         "untitled.tmx",
         "prototype_tileset.tsx",
         "test1.tmx",
-        "basic_tileset.tsx",
         "rules.tmx",
         "test_rules.tmx"
     ],
     "project": "Capstone.tiled-project",
     "recentFiles": [
         "untitled.tmx",
+        "prototype_tileset.tsx",
         "test_rules.tmx",
         "rules.tmx",
-        "basic_tileset.tsx",
         "test1.tmx",
-        "prototype_tileset.tsx",
+        "basic_tileset.tsx",
         "F:/Unity Projects/capstone/localBranch/Assets/Art/Tiled Tilemaps/CAPSTONE/test1.tmx",
         "F:/TILED/automappractice/rules.tmx",
         "F:/TILED/automappractice/Solaria Demo Update 01 32.tsx",
