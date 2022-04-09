@@ -57,13 +57,20 @@ public class LevelManager : MonoBehaviour
 
 
         _levelObjects = _currentScene.GetRootGameObjects();
+        var count = 0;
+        GameManager.SetNumEnemies(0);
         foreach (GameObject obj in _levelObjects)
         {
             if (obj.name == "Player")
             {
                 GameManager.SetPlayer(obj);
             }
+            if (obj.name == "Enemy")
+            {
+                count++;
+            }
         }
+        GameManager.SetNumEnemies(count);
     }
 
 

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     //
     [SerializeField] private int _life = 100;
+    [SerializeField] private int _numEnemies = 0;
 
     // player
 
@@ -38,6 +39,16 @@ public class GameManager : MonoBehaviour
     public static void SetPlayer(GameObject obj)
     {
         _instance._player = obj;
+    }
+
+    public static void SetNumEnemies(int count)
+    {
+        _instance._numEnemies = count;
+    }
+
+    public static int GetNumEnemies()
+    {
+        return _instance._numEnemies;
     }
 
     // Start is called before the first frame update
