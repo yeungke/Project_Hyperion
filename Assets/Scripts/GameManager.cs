@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour
         _instance._numEnemies = count;
     }
 
+    public void EnemySlain()
+    {
+        _numEnemies -= 1;
+    }
+
     public static int GetNumEnemies()
     {
         return _instance._numEnemies;
