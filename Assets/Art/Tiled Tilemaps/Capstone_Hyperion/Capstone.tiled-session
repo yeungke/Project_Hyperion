@@ -76,11 +76,11 @@
             }
         },
         "test1.tmx": {
-            "scale": 5.5,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 255.90909090909093,
-                "y": 143.90909090909093
+                "x": 279.5,
+                "y": 126
             }
         },
         "test_rules.tmx": {
