@@ -83,16 +83,16 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 716.6666666666666,
-                "y": 481.33333333333337
+                "x": 618,
+                "y": 460
             }
         },
         "test1.tmx": {
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 279,
-                "y": 147.33333333333334
+                "x": 256,
+                "y": 143.66666666666666
             }
         },
         "test_rules.tmx": {
