@@ -549,6 +549,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3602598696059814496, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602598696059814496, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -580,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: e595417a7584d2b4ab2a9d0f1a1d1482, type: 2}
+    - target: {fileID: 3602598696059814497, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3602598696059814498, guid: 12923ab0695bf0a4a84f763e66e69ddf, type: 3}
       propertyPath: canJump
       value: 1
