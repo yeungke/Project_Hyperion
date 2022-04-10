@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "test1.tmx",
+    "activeFile": "exampleTilemap.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "."
@@ -61,78 +61,87 @@
         },
         "background_tmp.tsx": {
             "scaleInDock": 4,
-            "scaleInEditor": 11
+            "scaleInEditor": 5.5
         },
         "basic_tileset.tsx": {
             "scaleInDock": 4,
-            "scaleInEditor": 8
+            "scaleInEditor": 5.5
+        },
+        "exampleTilemap.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 282.3333333333333,
+                "y": 160
+            }
         },
         "prototype_tileset.tsx": {
             "scaleInDock": 4,
-            "scaleInEditor": 8
+            "scaleInEditor": 5.5
         },
         "rules.tmx": {
-            "scale": 4,
-            "selectedLayer": 0,
+            "scale": 0.75,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 107.75,
-                "y": 911.25
+                "x": 716.6666666666666,
+                "y": 481.33333333333337
             }
         },
         "test1.tmx": {
-            "scale": 2,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 255,
-                "y": 98.5
+                "x": 279,
+                "y": 147.33333333333334
             }
         },
         "test_rules.tmx": {
-            "scale": 2,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 238.5,
-                "y": 139.5
+                "x": 334.3333333333333,
+                "y": 141.33333333333334
             }
         },
         "untitled.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -8,
-                "y": -58
+                "x": -9,
+                "y": -58.5
             }
         }
     },
     "last.imagePath": "F:/Unity Projects/capstone/Hyperion/Assets/Art/Tiled Tilemaps/Capstone_Hyperion/src",
     "map.fixedSize": true,
-    "map.height": 64,
+    "map.height": 18,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 64,
+    "map.width": 32,
     "openFiles": [
-        "untitled.tmx",
-        "prototype_tileset.tsx",
         "test1.tmx",
         "rules.tmx",
+        "exampleTilemap.tmx",
         "test_rules.tmx",
-        "background_tmp.tsx"
+        "background_tmp.tsx",
+        "prototype_tileset.tsx",
+        "basic_tileset.tsx"
     ],
     "project": "Capstone.tiled-project",
     "recentFiles": [
-        "untitled.tmx",
+        "test1.tmx",
+        "rules.tmx",
+        "basic_tileset.tsx",
         "prototype_tileset.tsx",
         "background_tmp.tsx",
         "test_rules.tmx",
-        "rules.tmx",
-        "test1.tmx",
-        "basic_tileset.tsx",
+        "exampleTilemap.tmx",
+        "untitled.tmx",
         "F:/Unity Projects/capstone/localBranch/Assets/Art/Tiled Tilemaps/CAPSTONE/test1.tmx",
         "F:/TILED/automappractice/rules.tmx",
         "F:/TILED/automappractice/Solaria Demo Update 01 32.tsx",
-        "F:/TILED/automappractice/capstonev1.tsx",
-        "F:/TILED/automappractice/rules2.tmx"
+        "F:/TILED/automappractice/capstonev1.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.margin": 0,
