@@ -8,6 +8,7 @@ public class MainMenu : View
     [SerializeField] private Button _startButton;
     public override void Initialize()
     {
+        _startButton.onClick.AddListener(() => GameManager.Play());
         _startButton.onClick.AddListener(() => LevelManager.LoadLevel("TestLevel"));
         _startButton.onClick.AddListener(() => ViewManager.Show<GameOverlay>());
     }

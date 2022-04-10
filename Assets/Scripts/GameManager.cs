@@ -14,6 +14,20 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _player;
 
+
+    public static void Pause()
+    {
+        Time.timeScale = 0f;
+        
+        //LevelManager.SwitchSceneToMenu();
+    }
+
+    public static void Play()
+    {
+        Time.timeScale = 1f;
+        //LevelManager.SwitchMenuToScene();
+    }
+
     private void OnEnable()
     {
         _instance = this;

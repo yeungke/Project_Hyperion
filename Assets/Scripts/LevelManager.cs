@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Scene _globalScene;
     [SerializeField] private Scene _currentScene;
     [SerializeField] private Scene _prevScene;
+    [SerializeField] private Scene _hold;
 
 
 
@@ -37,6 +38,24 @@ public class LevelManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public static void SwitchSceneToMenu()
+    {
+        if (_instance._globalScene != null && _instance._currentScene != _instance._globalScene)
+        {
+            SceneManager.SetActiveScene(_instance._globalScene);
+            
+        }
+    }
+
+    public static void SwitchMenuToScene()
+    {
+        if (_instance._globalScene != null && _instance._currentScene != _instance._globalScene)
+        {
+            SceneManager.SetActiveScene(_instance._currentScene);
+
+        }
     }
 
     public void OnSceneLoaded(Scene newScene, LoadSceneMode mode)
