@@ -12,11 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool crouch = false;
 
-    [SerializeField] private KeyCode attackKey = KeyCode.K;
-
     [SerializeField] private bool canJump = false;
     [SerializeField] private bool canCrouch = false;
-    [SerializeField] private bool canAttack = false;
 
 
     void GetUserInput()
@@ -35,11 +32,6 @@ public class PlayerMovement : MonoBehaviour
             crouch = true;
         else if (Input.GetButtonUp("Crouch"))
             crouch = false;
-
-        if (Input.GetKeyDown(attackKey))
-        {
-            animator.SetTrigger("AttackTrigger");
-        }
     }
 
     public void OnLanding()
