@@ -12,23 +12,19 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool crouch = false;
 
-    [SerializeField] private bool canJump = false;
-    [SerializeField] private bool canCrouch = false;
-
-
     void GetUserInput()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump") && canJump == true)
+        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
         {
             jump = true;
             animator.SetBool("IsJumping", true);
         }
 
-        if (Input.GetButtonDown("Crouch") && canCrouch == true)
+        if (Input.GetButtonDown("Crouch") && UpgradeManager.instance.GetCrouch() == true)
             crouch = true;
         else if (Input.GetButtonUp("Crouch"))
             crouch = false;
@@ -42,16 +38,6 @@ public class PlayerMovement : MonoBehaviour
     public void OnCrouching(bool isCrouching)
     {
         animator.SetBool("IsCrouching", isCrouching);
-    }
-
-    public void SetJump(bool val)
-    {
-        canJump = val;
-    }
-
-    public void SetCrouch(bool val)
-    {
-        canCrouch = val;
     }
 
     void MoveController()

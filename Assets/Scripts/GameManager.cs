@@ -40,13 +40,17 @@ public class GameManager : MonoBehaviour
 
     public static void ToggleUpgrade(string name, bool val)
     {
+        // Toggles the Jump in the Upgrade Manager, based on the input values given
         if (name == "jump")
         {
-            _instance._player.GetComponent<PlayerMovement>()?.SetJump(val);
+            UpgradeManager.instance.SetJump(val);
+            //_instance._player.GetComponent<PlayerMovement>()?.SetJump(val);
         }
+        // Toggles the Crouch in the Upgrade Manager, based on the input values given
         else if (name == "crouch")
         {
-            _instance._player.GetComponent<PlayerMovement>()?.SetCrouch(val);
+            UpgradeManager.instance.SetCrouch(val);
+            //_instance._player.GetComponent<PlayerMovement>()?.SetCrouch(val);
         }
     }
 

@@ -10,7 +10,6 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
 
     [SerializeField] private KeyCode attackKey = KeyCode.K;
-    [SerializeField] private bool canAttack = false;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackCooldown = 0f;
 
@@ -19,14 +18,16 @@ public class PlayerCombat : MonoBehaviour
         UpgradeBlock upgrade = collision.gameObject.GetComponent<UpgradeBlock>();
 
         if (upgrade != null)
-            canAttack = true;
+        {
+            UpgradeManager.instance.SetAttackSword(true);
+        }
     }
 
     private void GetUserInput()
     {
         if (Time.time >= attackCooldown)
         {
-            if (Input.GetKeyDown(attackKey) && canAttack == true)
+            if (Input.GetKeyDown(attackKey) && UpgradeManager.instance.GetAttackSword() == true)
             {
                 MeleeAttack();
                 attackCooldown = Time.time + 1f / attackRate;
