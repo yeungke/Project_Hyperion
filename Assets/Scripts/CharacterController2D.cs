@@ -7,7 +7,8 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0, 1)][SerializeField] private float m_CrouchSpeed = .4f;            // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;   // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
-	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
+	[SerializeField] private LayerMask m_WalkableSurfaces;                      // A mask determining the ground relative to the character
+	[SerializeField] private LayerMask m_CeilingLayer;                          // A mask determining a ceiling relative to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
@@ -48,7 +49,7 @@ public class CharacterController2D : MonoBehaviour
 
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WalkableSurfaces);
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			if (colliders[i].gameObject != gameObject)
@@ -68,16 +69,15 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			// BUG FIX NEEDED: Collision with ceilings or other enemy colliders on Player's Ceiling Check forces crouching
-			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_CeilingLayer))
 			{
 				crouch = true;
 			}
 		}
 
-		//only control the player if grounded or airControl is turned on
+		// Only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
-
 			// If crouching
 			if (crouch)
 			{
