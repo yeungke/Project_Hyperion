@@ -451,6 +451,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: 1
   crouch: 1
+  crouchJump: 0
+  crouchAir: 0
   attackSword: 1
 --- !u!1 &1664778352
 GameObject:
