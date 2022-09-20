@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class MainMenu : View
 {
     [SerializeField] private Button _startButton;
+    [SerializeField] private string _startLevel;
     public override void Initialize()
     {
         _startButton.onClick.AddListener(() => GameManager.Play());
-        _startButton.onClick.AddListener(() => LevelManager.LoadLevel("TestLevel"));
+        _startButton.onClick.AddListener(() => LevelManager.LoadLevel(_startLevel));
         _startButton.onClick.AddListener(() => ViewManager.Show<GameOverlay>());
     }
 
