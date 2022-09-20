@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerRangedAttack : MonoBehaviour
 {
+    // Retrieves the PlayerMovement script to determine if the player is crouching
+    public PlayerMovement movementScript;
+
     [SerializeField] private GameObject bullet;
     [SerializeField] private KeyCode key = KeyCode.L;
     [SerializeField] private Animator animator;
@@ -16,7 +19,8 @@ public class PlayerRangedAttack : MonoBehaviour
     // Allows the player to fire a ranged attack; queues the animation and adds to the cooldown
     private void FireWeapon()
     {
-        if (Input.GetKeyDown(key) == true && cooldownTimer == 0 /*&& GameManager.instance.canShoot == true*/)
+        if (Input.GetKeyDown(key) == true && cooldownTimer == 0 && UpgradeManager.instance.GetAttackGun() == true &&
+            movementScript.GetCrouching() == false)
         {
             Invoke("LaunchProjectile", attackBuffer);
             cooldownTimer += attackTimer;

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     private bool jump = false;
-    private bool crouch = false;
+    [SerializeField] private bool crouch = false;
 
     void GetUserInput()
     {
@@ -58,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
     public void OnCrouching(bool isCrouching)
     {
         animator.SetBool("IsCrouching", isCrouching);
+    }
+
+    public bool GetCrouching()
+    {
+        return crouch;
     }
 
     void MoveController()

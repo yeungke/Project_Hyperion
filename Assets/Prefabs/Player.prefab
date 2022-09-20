@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 924344397313029579}
   m_Layer: 0
-  m_Name: AttackPoint
+  m_Name: MeleeAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 6815979935899393623}
   - component: {fileID: 6815979935899393621}
   - component: {fileID: 6815979935899393620}
+  - component: {fileID: 8208591577222564772}
   - component: {fileID: 8027729895425006644}
   - component: {fileID: 8027729895425006645}
-  - component: {fileID: 8027729895425006652}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -264,6 +264,29 @@ MonoBehaviour:
   controller: {fileID: 6815979935899393621}
   animator: {fileID: 8027729895425006645}
   runSpeed: 40
+  crouch: 0
+--- !u!114 &8208591577222564772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815979935899393618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225521c3030a7bf46bfc0d03d79c7440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementScript: {fileID: 6815979935899393620}
+  animator: {fileID: 8027729895425006645}
+  attackRange: 0.35
+  attackRate: 2
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  attackKey: 107
+  attackPoint: {fileID: 924344397313029579}
+  attackCooldown: 0
 --- !u!212 &8027729895425006644
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -334,27 +357,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8027729895425006652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6815979935899393618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4711929ff3907847b0ad74fa61b95a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8027729895425006645}
-  attackRange: 0.35
-  attackRate: 2
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  attackKey: 107
-  attackPoint: {fileID: 924344397313029579}
-  attackCooldown: 0
 --- !u!1 &6815979936364106867
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,9 +460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc0e6e5c666cb64088bc4e8fd8faf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementScript: {fileID: 6815979935899393620}
   bullet: {fileID: 4377464105645987151, guid: 83060e36d8f652d4aac88aae8badfa94, type: 3}
   key: 108
-  animator: {fileID: 0}
+  animator: {fileID: 8027729895425006645}
   attackBuffer: 0.5
   cooldownTimer: 0
   attackTimer: 1

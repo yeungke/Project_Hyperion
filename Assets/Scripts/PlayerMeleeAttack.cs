@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerMeleeAttack : MonoBehaviour
 {
+    // Retrieves the PlayerMovement script to determine if the player is crouching
+    public PlayerMovement movementScript;
+
     public Animator animator;
-    public float attackRange = 0.5f;
+    public float attackRange = 0.35f;
     public float attackRate = 2f;
     public LayerMask enemyLayers;
 
@@ -27,7 +30,8 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Time.time >= attackCooldown)
         {
-            if (Input.GetKeyDown(attackKey) && UpgradeManager.instance.GetAttackSword() == true)
+            if (Input.GetKeyDown(attackKey) && UpgradeManager.instance.GetAttackSword() == true &&
+                movementScript.GetCrouching() == false)
             {
                 MeleeAttack();
                 attackCooldown = Time.time + 1f / attackRate;
@@ -44,9 +48,9 @@ public class PlayerCombat : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         // Deal damage to enemies
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log(enemy.name + "was hit!");
+            Debug.Log(enemy.name + " was hit!");
         }
     }
 
