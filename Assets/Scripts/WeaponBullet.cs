@@ -4,13 +4,37 @@ using UnityEngine;
 
 public class WeaponBullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 15f; // speed of the projectile
+    [SerializeField] private float speed = 8f; // speed of the projectile
+    [SerializeField] private int damage = 1; // damage dealt to enemies
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float maxDistance;
+    [SerializeField] private float objectDistance;
+
 
     // Colliding with an enemy or boss destroys the bullet, conditional on the distance travelled and number of enemies hit
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        // Prints the name of the Object the bullet collides with, for debugging purposes
+        Debug.Log(collision.name);
+
+        // Detect enemy object
+        EnemyController enemy = collision.GetComponent<EnemyController>();
+        if (enemy != null)
+        {
+            // if the player doesn't have piercing shot during enemy collision, destroy the bullet
+            if (UpgradeManager.instance.GetAttackGunPierce() == false)
+                DestroyObject();
+            enemy.TakeDamage(damage); // enemy takes damage upon collision with bullet
+        }
+
+        // Detect terrain layer
+        bool terrain = collision.gameObject.layer == LayerMask.NameToLayer("Terrain");
+        //TerrainLayer terrain = collision.GetComponent<TerrainLayer>();
+        // If the player doesn't have x-ray shot, destroy the bullet
+        if (terrain == true && UpgradeManager.instance.GetAttackGunXray() == false)
+        {
+            DestroyObject();
+        }
     }
 
     // Method called to destroy the object
@@ -21,18 +45,33 @@ public class WeaponBullet : MonoBehaviour
 
     private void MoveForward()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * speed);
+        // A reusable variable to keep track of how far the bullet has travelled, using time and speed
+        float travel = Time.deltaTime * speed;
+
+        transform.Translate(Vector2.right * travel); // Bullet moves in the direction of the shot (right by default)
+        objectDistance += travel; // Update the object's distance travelled
+
+        // Once the bullet has reached its max distance, the bullet is destroyed
+        if (objectDistance > maxDistance)
+            DestroyObject();
     }
 
     // Start function is called upon initialization
     private void Start()
     {
+        objectDistance = 0;
         rb.velocity = transform.right * speed;
+
+        // If the player has the Long Gun Attack upgrade, increase the range of the bullet
+        if (UpgradeManager.instance.GetAttackGunLong() == true)
+            maxDistance = 5f;
+        else
+            maxDistance = 2.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //MoveForward();
+        MoveForward();
     }
 }

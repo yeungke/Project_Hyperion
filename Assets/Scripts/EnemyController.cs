@@ -24,14 +24,6 @@ public class EnemyController : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float period = 1.0f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-/*        if (collision.CompareTag("Weapon"))
-        {
-            enemyHealth -= 1;
-        }*/
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -114,13 +106,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        enemyHealth -= damage;
+
+        if (enemyHealth <= 0)
+            EnemyKilled();
+    }
+
     void EnemyKilled()
     {
-        if (enemyHealth == 0)
-        {
-            anim.SetTrigger("killed");
-            GameManager.EnemySlain();
-        }
+        anim.SetTrigger("killed");
+        GameManager.EnemySlain();
     }
 
     // Update is called once per frame
@@ -128,6 +125,5 @@ public class EnemyController : MonoBehaviour
     {
         EnemyMovementUpdate();
         EnemyAttack();
-        EnemyKilled();
     }
 }

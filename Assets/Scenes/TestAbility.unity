@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 51708299}
   - component: {fileID: 51708298}
   - component: {fileID: 51708297}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floating Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,6 +413,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: col.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: col.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: col.g
+      value: 0.026133187
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: col.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: script
       value: 
       objectReference: {fileID: 1535643308}
@@ -420,6 +436,38 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1535643305}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: colour.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: colour.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: colour.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: distance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: vectorDir.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: vectorDir.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: attackBuffer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: vectorDirection.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8027729895425006652, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
     - {fileID: 8208591577222564772, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
@@ -473,6 +521,9 @@ MonoBehaviour:
   crouchAir: 0
   attackSword: 1
   attackGun: 1
+  attackGunLong: 1
+  attackGunPierce: 0
+  attackGunXray: 1
 --- !u!4 &1337074859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 924344397313029579, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
@@ -532,7 +583,7 @@ GameObject:
   - component: {fileID: 1664778355}
   - component: {fileID: 1664778354}
   - component: {fileID: 1664778353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

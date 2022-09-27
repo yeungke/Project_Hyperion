@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6678859747933258361}
   - component: {fileID: -5288811755390280941}
   - component: {fileID: -6172204741817407672}
+  - component: {fileID: 3133055368767547467}
   m_Layer: 0
   m_Name: TestBullet
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 0.9674583, b: 0.12641507, a: 1}
   m_FlipX: 0
@@ -96,8 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c94025a0629064ab3fe39dbfbabab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 8
+  damage: 1
   rb: {fileID: -6172204741817407672}
+  maxDistance: 2.5
+  objectDistance: 0
 --- !u!50 &-6172204741817407672
 Rigidbody2D:
   serializedVersion: 4
@@ -119,3 +123,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &3133055368767547467
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377464105645987151}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

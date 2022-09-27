@@ -874,7 +874,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: 1
   crouch: 1
+  crouchJump: 0
+  crouchAir: 0
   attackSword: 0
+  attackGun: 1
+  attackGunLong: 1
 --- !u!1 &1341695956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,6 +1477,10 @@ PrefabInstance:
     - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: m_WhatIsCeiling.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: attackBuffer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}

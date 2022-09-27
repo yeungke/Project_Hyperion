@@ -12,9 +12,16 @@ public class PlayerRangedAttack : MonoBehaviour
     [SerializeField] private Animator animator;
 
     // Sync the timing of the animation with the projectile; set a weapon cooldown (to prevent spamming)
-    [SerializeField] private float attackBuffer = 0.2f;
+    [SerializeField] private float attackBuffer = 0f;
     [SerializeField] private float cooldownTimer = 0;
     [SerializeField] private float attackTimer = 1.0f;
+
+    // Raycast to test for bullet travel distance
+    [Header("Ray Cast Debugging Tools")]
+    [Space(10)]
+    [SerializeField] private Vector2 vectorDirection;
+    [SerializeField] private Color colour;
+    [SerializeField] private float distance;
 
     // Allows the player to fire a ranged attack; queues the animation and adds to the cooldown
     private void FireWeapon()
@@ -41,10 +48,18 @@ public class PlayerRangedAttack : MonoBehaviour
             cooldownTimer = 0;
     }
 
+    public void BasicRayCast()
+    {
+        Vector2 vStart = transform.position;
+        Vector2 vEnd = vStart + distance * vectorDirection;
+        Debug.DrawLine(vStart, vEnd, colour);
+    }
+
     // Update is called once per frame
     void Update()
     {
         FireWeapon();
         WeaponCooldown();
+        BasicRayCast();
     }
 }

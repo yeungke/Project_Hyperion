@@ -14,6 +14,9 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private bool crouchAir;
     [SerializeField] private bool attackSword;
     [SerializeField] private bool attackGun;
+    [SerializeField] private bool attackGunLong;
+    [SerializeField] private bool attackGunPierce;
+    [SerializeField] private bool attackGunXray;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +49,18 @@ public class UpgradeManager : MonoBehaviour
     // Gun Attack accessor and mutator
     public bool GetAttackGun() => attackGun;
     public void SetAttackGun(bool gunBool) => attackGun = gunBool;
+
+    // Long Gun Attack accessor and mutator
+    public bool GetAttackGunLong() => attackGunLong;
+    public void SetAttackGunLong(bool gunBoolLong) => attackGunLong = gunBoolLong;
+    
+    // Piercing Gun Attack accessor and mutator
+    public bool GetAttackGunPierce() => attackGunPierce;
+    public void SetAttackGunPierce(bool gunBoolPierce) => attackGunPierce = gunBoolPierce;
+
+    // X-Ray Gun Attack accessor and mutator
+    public bool GetAttackGunXray() => attackGunXray;
+    public void SetAttackGunXray(bool gunBoolXray) => attackGunXray = gunBoolXray;
 
     // Update is called once per frame
     void Update()
