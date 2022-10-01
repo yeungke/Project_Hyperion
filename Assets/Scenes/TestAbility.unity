@@ -401,6 +401,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: jumpTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: m_JumpForce
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: m_WhatIsCeiling.m_Bits
       value: 512
       objectReference: {fileID: 0}
@@ -453,6 +461,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: attackTimer
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: chargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: vectorDir.x
       value: 1
       objectReference: {fileID: 0}
@@ -464,6 +480,10 @@ PrefabInstance:
       propertyPath: attackBuffer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: chargedBullet
+      value: 
+      objectReference: {fileID: 6559760982362507228, guid: 64e56362c23525b4d898077638bb464c, type: 3}
     - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: vectorDirection.x
       value: 1
@@ -522,6 +542,7 @@ MonoBehaviour:
   attackSword: 1
   attackGun: 1
   attackGunLong: 1
+  attackGunCharge: 1
   attackGunPierce: 0
   attackGunXray: 1
 --- !u!4 &1337074859 stripped

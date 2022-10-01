@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-	[SerializeField] private float m_JumpForce = 600f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float m_JumpForce = 6f;                          // Amount of force added when the player jumps.
 	[Range(0, 1)][SerializeField] private float m_CrouchSpeed = .4f;            // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;   // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -19,6 +19,10 @@ public class CharacterController2D : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;  // The player's Rigidbody
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+
+	private float jumpTimeCounter;
+	public bool isJumping;
+	[SerializeField] private float jumpTime = 0.25f;
 
 	[Header("Events")]
 	[Space]
@@ -62,7 +66,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, bool jumpHold)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -125,13 +129,37 @@ public class CharacterController2D : MonoBehaviour
 				Flip();
 			}
 		}
+
 		// If the player should jump...
 		if (m_Grounded && jump)
 		{
-			// Add a vertical force to the player.
+			// Set the bool to indicate that the player is jumping, and set the jump time counter.
+			isJumping = true;
+			jumpTimeCounter = jumpTime;
+			// Change the upward velocity of the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
 		}
+
+		// When the timer is started, run the timer until it hits 0
+		if (jumpTimeCounter > 0)
+			jumpTimeCounter -= Time.deltaTime;
+		else
+			jumpTimeCounter = 0;
+
+		// If the player holds the jump key while they are in the air...
+		if (isJumping && jumpHold)
+		{
+			// Maintain the player's jump velocity so long as the counter is > 0
+			if (jumpTimeCounter > 0)
+				m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
+			// When the timer runs out, end the jump velocity
+			else
+				isJumping = false;
+		}
+		// If the player lets go of the jump button, immediately stop the jump velocity
+		else if (isJumping && !jumpHold)
+			isJumping = false;
 	}
 
 

@@ -21,6 +21,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private bool attackSword;
     [SerializeField] private bool attackGun;
     [SerializeField] private bool attackGunLong;
+    [SerializeField] private bool attackGunCharge;
     [SerializeField] private bool attackGunPierce;
     [SerializeField] private bool attackGunXray;
 
@@ -171,6 +172,10 @@ public class UpgradeManager : MonoBehaviour
     // Long Gun Attack accessor and mutator
     public bool GetAttackGunLong() => attackGunLong;
     public void SetAttackGunLong(bool gunBoolLong) => attackGunLong = gunBoolLong;
+    
+    // Long Gun Attack accessor and mutator
+    public bool GetAttackGunCharge() => attackGunCharge;
+    public void SetAttackGunCharge(bool gunBoolCharge) => attackGunCharge = gunBoolCharge;
     
     // Piercing Gun Attack accessor and mutator
     public bool GetAttackGunPierce() => attackGunPierce;

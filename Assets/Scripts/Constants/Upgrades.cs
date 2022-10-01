@@ -11,6 +11,7 @@ public enum Upgrades
     CROUCHAIR, 
     ATTACKSWORD, 
     ATTACKGUN, 
+    ATTACKGUNCHARGE, 
     ATTACKGUNLONG, 
     ATTACKGUNPIERCE 
 

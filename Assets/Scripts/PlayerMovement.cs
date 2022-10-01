@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     private bool jump = false;
+    private bool jumpHold = false;
     [SerializeField] private bool crouch = false;
+
 
     void GetUserInput()
     {
@@ -33,6 +35,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 jump = true;
             }
+        }
+
+        // If the player holds down the jump button, maintain the player's jump velocity
+        if (Input.GetButton("Jump"))
+        {
+            jumpHold = true;
+        }
+
+        // If the player lifts the jump button, stop the force of the jump
+        if (Input.GetButtonUp("Jump"))
+        {
+            jumpHold = false;
         }
 
         // If the player presses the crouch key, and crouch is enabled in the Upgrade Manager
@@ -68,8 +82,14 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveController()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump, jumpHold);
         jump = false;
+    }
+
+    void Start()
+    {
+        jump = false;
+        jumpHold = false;
     }
 
     // Update is called once per frame
