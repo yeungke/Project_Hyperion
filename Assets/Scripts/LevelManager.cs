@@ -22,6 +22,11 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
     }
 
+    public static void LoadLevel1(string s, SpawnLocations spawn)
+    {
+        SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
+    }
+
     private void Awake()
     {
     }
@@ -107,7 +112,10 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (_instance == null)
+        {
+            _instance = this;
+        }
     }
 
     // Update is called once per frame

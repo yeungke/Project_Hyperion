@@ -7,6 +7,12 @@ public class UpgradeManager : MonoBehaviour
     // Initialize single instance of UpgradeManager
     public static UpgradeManager instance;
 
+
+    //[SerializeField]private List<Upgrade> _upgrades;
+
+    private Hashtable _upgradesList;
+
+
     // Values that determine the player's upgrades
     [SerializeField] private bool jump;
     [SerializeField] private bool crouch;
@@ -24,7 +30,119 @@ public class UpgradeManager : MonoBehaviour
         // Singleton pattern instance
         if (instance == null)
             instance = this;
+
+        /*for (int i = 0; i < System.Enum.GetValues(typeof(Upgrades)).Length; i++)
+        {
+            Upgrade _upgrade = new Upgrade((Upgrades) i, false, false);
+            _upgrades.Add(_upgrade);
+            Debug.Log("added upgrade" + _upgrade);
+        }*/
+
+
+        // Possibly store/load hashtable from playerprefs
+        _upgradesList = new Hashtable();
+        for (int i = 0; i < System.Enum.GetValues(typeof(Upgrades)).Length; i++)
+        {
+            /*            List<bool> upgrade = new List<bool>();
+                        upgrade.Add(false);
+                        upgrade.Add(false);*/
+            Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
+            _upgradesList.Add((Upgrades) i, upgrade);
+            Debug.Log(_upgradesList[(Upgrades)i].ToString());
+        }
     }
+
+    #region HashTable Upgrades
+    public bool HasUpgrade(Upgrades type) 
+    {
+        //bool hasUpgrade = false;
+
+
+        if (!_upgradesList.ContainsKey(type))
+        {
+            //Debug.Log("does not contain upgrade");
+            return false;
+        }
+        else
+        {
+            //Debug.Log("contains upgrade");
+            Upgrade upgrade = (Upgrade)_upgradesList[type];
+            Debug.Log($"{upgrade._pickedUp}");
+            return upgrade._pickedUp;
+        }
+        /*foreach (Upgrade u in _upgrades)
+        {
+            if (u._upgradeType == type)
+            {
+                if (u._pickedUp)
+                {
+                    hasUpgrade = true;
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }*/
+        //return hasUpgrade;
+    }
+
+    public void AddUpgrade(Upgrades type)
+    {
+        /*foreach (Upgrade upgrade in _upgrades)
+        {
+            if (upgrade._upgradeType == type)
+            {
+                upgrade._pickedUp = true;
+
+                //temp - delete later
+                upgrade._enabled = true;
+                break;
+            }
+        }*/
+
+
+        if (!_upgradesList.ContainsKey(type))
+        {
+            Upgrade upgrade = new Upgrade(type, true, false);
+            _upgradesList.Add(type, upgrade);
+            Debug.Log(_upgradesList[type].ToString());
+        }
+        else
+        {
+            Upgrade upgrade = (Upgrade)_upgradesList[type];
+            upgrade._pickedUp = true;
+            _upgradesList[type] = upgrade;
+            Debug.Log(_upgradesList[type].ToString());
+        }
+    }
+
+    public void EnableUpgrade(Upgrades type)
+    {
+        if (_upgradesList.ContainsKey(type))
+        {
+            Upgrade upgrade = (Upgrade)_upgradesList[type];
+
+            if (upgrade._pickedUp)
+            {
+                upgrade._enabled = true;
+                _upgradesList[type] = upgrade;
+                Debug.Log(_upgradesList[type].ToString());
+            }
+        }
+    }
+
+    public bool IsEnabled(Upgrades type)
+    {
+        if (_upgradesList.ContainsKey(type))
+        {
+            Upgrade upgrade = (Upgrade)_upgradesList[type];
+            return upgrade._enabled;
+        }
+        return false;
+    }
+    #endregion
 
     // Jump accessor and mutator
     public bool GetJump() => jump;

@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         // If the player presses the jump key, and jump is enabled in the Upgrade Manager
-        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
+        //if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
+        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.IsEnabled(Upgrades.JUMP))
         {
             // If the player is not crouching, the player jumps, and the jump animation plays
             if (crouch == false)
@@ -28,20 +29,20 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("IsJumping", true);
             }
             // If CrouchJump is enabled in the Upgrade Manager, the player can jump while they are crouching
-            if (crouch == true && UpgradeManager.instance.GetCrouchJump() == true)
+            if (crouch == true && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
             {
                 jump = true;
             }
         }
 
         // If the player presses the crouch key, and crouch is enabled in the Upgrade Manager
-        if (Input.GetButtonDown("Crouch") && UpgradeManager.instance.GetCrouch() == true)
+        if (Input.GetButtonDown("Crouch") && UpgradeManager.instance.IsEnabled(Upgrades.CROUCH))
         {
             // The player crouches if the player is grounded
             if (Input.GetButtonDown("Crouch") && controller.m_Grounded == true)
                 crouch = true;
             // If CrouchAir is enabled in the Upgrade Manager, the player can crouch when they are not grounded
-            else if (controller.m_Grounded == false && UpgradeManager.instance.GetCrouchAir())
+            else if (controller.m_Grounded == false && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHAIR))
                 crouch = true;
         }
         else if (Input.GetButtonUp("Crouch"))
