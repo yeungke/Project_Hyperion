@@ -47,13 +47,26 @@ public class UpgradeManager : MonoBehaviour
             /*            List<bool> upgrade = new List<bool>();
                         upgrade.Add(false);
                         upgrade.Add(false);*/
-            Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
+            //Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
+            Upgrade upgrade = new Upgrade((Upgrades)i, true, false);
             _upgradesList.Add((Upgrades) i, upgrade);
             Debug.Log(_upgradesList[(Upgrades)i].ToString());
         }
     }
 
     #region HashTable Upgrades
+
+    public List<Upgrade> GetUpgrades()
+    {
+        List<Upgrade> upgradeList = new List<Upgrade>();
+        foreach (DictionaryEntry upgrade in _upgradesList)
+        {
+            upgradeList.Add((Upgrade)upgrade.Value);
+        }
+
+        return upgradeList;
+    }
+
     public bool HasUpgrade(Upgrades type) 
     {
         //bool hasUpgrade = false;
@@ -128,6 +141,21 @@ public class UpgradeManager : MonoBehaviour
             if (upgrade._pickedUp)
             {
                 upgrade._enabled = true;
+                _upgradesList[type] = upgrade;
+                Debug.Log(_upgradesList[type].ToString());
+            }
+        }
+    }
+
+    public void DisableUpgrade(Upgrades type)
+    {
+        if (_upgradesList.ContainsKey(type))
+        {
+            Upgrade upgrade = (Upgrade)_upgradesList[type];
+
+            if (upgrade._pickedUp)
+            {
+                upgrade._enabled = false;
                 _upgradesList[type] = upgrade;
                 Debug.Log(_upgradesList[type].ToString());
             }
