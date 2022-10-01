@@ -611,6 +611,10 @@ PrefabInstance:
       propertyPath: crouch
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: m_JumpForce
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
 --- !u!1 &1212847164 stripped
