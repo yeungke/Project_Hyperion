@@ -17,9 +17,10 @@ public class PauseListener : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+/*            GameManager.Pause();
             List<Upgrade> upgrades = UpgradeManager.instance.GetUpgrades();
             UpgradeListView upgradeListView = (UpgradeListView)Instantiate(_upgradeListViewPrefab);
-            upgradeListView.Prime(upgrades);
+            upgradeListView.Prime(upgrades);*/
         }
     }
 }

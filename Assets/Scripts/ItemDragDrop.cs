@@ -65,30 +65,20 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void CheckEquippedOrParent(GameObject obj)
     {
-        //Debug.Log("CheckEquippedOrParent Called");
-        /*if (_parent != null && _parent != obj)
-        {*/
         if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "eqp") 
         {
-            /*_parent.GetComponent<ItemSlot>()?.RemoveOccupant();
-            _parent = obj;*/
 
             if (_upgradeSlot != null)
             {
-                //Debug.Log("dropped into upgrade slot");
                 _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
-                //_upgradeSlot = obj;
                 _upgradeSlot = obj;
             }
         }
         if (obj.GetComponent<ItemSlot>()?.GetSlotType() == "inv")
         {
-            //Debug.Log("dropped into iventory slot");
             if (_upgradeSlot != null)
             {
-                //Debug.Log("upgradeSlot not null");
                 _upgradeSlot.GetComponent<ItemSlot>()?.RemoveOccupant();
-                //_upgradeSlot = obj;
                 _upgradeSlot = null;
 
                 Unequip();
@@ -163,6 +153,7 @@ public class ItemDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
                     hit.gameObject.GetComponent<ItemSlot>().SetOccupant(this.gameObject);
                     this.GetComponent<RectTransform>().anchoredPosition = hit.gameObject.GetComponent<RectTransform>().anchoredPosition;
                     placed = true;
+                    break;
                 }
             }
         }

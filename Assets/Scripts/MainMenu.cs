@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : View
 {
     [SerializeField] private Button _startButton;
     [SerializeField] private string _startLevel;
+    [SerializeField] private ViewManager _viewManager;
     public override void Initialize()
     {
         _startButton.onClick.AddListener(() => GameManager.Play());
-        _startButton.onClick.AddListener(() => LevelManager.LoadLevel(_startLevel));
-        _startButton.onClick.AddListener(() => ViewManager.Show<GameOverlay>());
+
+        // old
+        //_startButton.onClick.AddListener(() => LevelManager.LoadLevel(_startLevel));
+        _startButton.onClick.AddListener(() => SceneManager.LoadSceneAsync(_startLevel));
+        _startButton.onClick.AddListener(() => _viewManager.Show<GameOverlay>());
     }
 
 

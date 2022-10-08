@@ -9,10 +9,12 @@ public class GameOverlay : View
 
     [SerializeField] private Text _lifeText;
 
+    [SerializeField] private ViewManager _viewManager;
+
 
     public override void Initialize()
     {
-        _pauseButton.onClick.AddListener(() => ViewManager.Show<PauseMenu>());
+        _pauseButton.onClick.AddListener(() => _viewManager.Show<PauseMenu>());
         _pauseButton.onClick.AddListener(() => GameManager.Pause());
     }
 
@@ -26,5 +28,11 @@ public class GameOverlay : View
     void Update()
     {
         _lifeText.text = "Life: " + GameManager.LifeUIUpdate().ToString(); ;
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            _viewManager.Show<PauseMenu>();
+            GameManager.Pause();
+        }
     }
 }

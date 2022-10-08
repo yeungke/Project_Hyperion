@@ -48,7 +48,7 @@ public class UpgradeManager : MonoBehaviour
                         upgrade.Add(false);
                         upgrade.Add(false);*/
             //Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
-            Upgrade upgrade = new Upgrade((Upgrades)i, true, false);
+            Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
             _upgradesList.Add((Upgrades) i, upgrade);
             Debug.Log(_upgradesList[(Upgrades)i].ToString());
         }
@@ -116,12 +116,20 @@ public class UpgradeManager : MonoBehaviour
             }
         }*/
 
+        //UpgradeListView upgradeUI = GameObject.Find("Upgrade_UI").GetComponent<UpgradeListView>();
+
+        UpgradeListView upgradeUI = Object.FindObjectOfType<UpgradeListView>();
 
         if (!_upgradesList.ContainsKey(type))
         {
             Upgrade upgrade = new Upgrade(type, true, false);
             _upgradesList.Add(type, upgrade);
             Debug.Log(_upgradesList[type].ToString());
+            if (upgradeUI != null)
+            {
+                Debug.Log("checkl");
+                upgradeUI.PickedUpUpgrade(type);
+            }
         }
         else
         {
@@ -129,6 +137,11 @@ public class UpgradeManager : MonoBehaviour
             upgrade._pickedUp = true;
             _upgradesList[type] = upgrade;
             Debug.Log(_upgradesList[type].ToString());
+            if (upgradeUI != null)
+            {
+                Debug.Log("check2");
+                upgradeUI.PickedUpUpgrade(type);
+            }
         }
     }
 

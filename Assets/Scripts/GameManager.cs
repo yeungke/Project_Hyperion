@@ -10,10 +10,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _life = 100;
     [SerializeField] private int _numEnemies = 0;
 
+    //debug mode
+    [SerializeField] private bool _debug = false;
+
     // player
 
     [SerializeField] private GameObject _player;
 
+    public static bool GetDebug()
+    {
+        return _instance._debug;
+    }
 
     public static void Pause()
     {

@@ -8,16 +8,28 @@ public class UpgradeListItem : MonoBehaviour
     [SerializeField] private Text _upgradeText;
     [SerializeField] private Button _upgradeButton;
 
+    [SerializeField] private bool _debug;
+    [SerializeField] private Button _debugButton;
+
     private Upgrade _upgrade;
 
     public void PickedUpUpgrade()
     {
         _upgradeText.text = $"{_upgrade._upgradeType}";
         _upgradeButton.enabled = true;
+        if (_debug)
+        {
+            _debugButton.gameObject.SetActive(false);
+        }
     }
     public void SetUpgrade(Upgrade upgrade)
     {
         _upgrade = upgrade;
+
+        if (_debug && !_upgrade._pickedUp)
+        {
+            _debugButton.gameObject.SetActive(true);
+        }
         if (upgrade._pickedUp)
         {
             _upgradeText.text = $"{upgrade._upgradeType}";
@@ -31,7 +43,22 @@ public class UpgradeListItem : MonoBehaviour
             _upgradeText.text = "???";
         }
     }
+    private void Awake()
+    {
+        _debug = GameManager.GetDebug();
+/*        Debug.Log($"debug: {_debug}");
+        if (_debug && !_upgrade._pickedUp)
+        {
+            _debugButton.gameObject.SetActive(true);
+        }*/
+    }
 
+    public void DebugPickedUpUpgrade()
+    {
+        _upgradeText.text = $"{_upgrade._upgradeType}";
+        _upgradeButton.enabled = true;
+        UpgradeManager.instance.AddUpgrade(_upgrade._upgradeType);
+    }
 
     public Upgrade GetUpgrade()
     {

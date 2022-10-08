@@ -296,9 +296,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _upgradeItems: []
+  _viewManager: {fileID: 5559584679538749945, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
   _upgradePanel: {fileID: 3444745934974441338}
   _upgradeItemPrefab: {fileID: 1633333061041081382, guid: da28a28a75a5565429d9afebb7ee1c6c, type: 3}
   _targetTransform: {fileID: 3444745934974441339}
+  _closeButton: {fileID: 7175066265911128576}
 --- !u!1 &3444745935128224414
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +501,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5202103108257627283}
         m_TargetAssemblyTypeName: UpgradeListView, Assembly-CSharp
         m_MethodName: DestroyObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 5559584679538749945, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
+        m_TargetAssemblyTypeName: ViewManager, Assembly-CSharp
+        m_MethodName: ShowView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
