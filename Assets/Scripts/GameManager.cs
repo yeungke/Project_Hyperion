@@ -81,6 +81,11 @@ public class GameManager : MonoBehaviour
         return _instance._numEnemies;
     }
 
+    public static void DamageTaken(int dmg)
+    {
+        _instance._life -= dmg;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
