@@ -92,6 +92,11 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int dmg)
+    {
+        _health -= dmg;
+    }
+
     private void Attack()
     {
         Debug.Log("attacking");

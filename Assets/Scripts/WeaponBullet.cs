@@ -27,6 +27,14 @@ public class WeaponBullet : MonoBehaviour
             enemy.TakeDamage(damage); // enemy takes damage upon collision with bullet
         }
 
+        FlyingEnemy fe = collision.GetComponent<FlyingEnemy>();
+        if (fe != null)
+        {
+            fe.TakeDamage(2);
+            DestroyObject();
+
+        }
+
         // Detect terrain layer
         bool terrain = collision.gameObject.layer == LayerMask.NameToLayer("Terrain");
         //TerrainLayer terrain = collision.GetComponent<TerrainLayer>();

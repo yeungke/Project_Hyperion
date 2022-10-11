@@ -47,7 +47,7 @@ public class PlayerRangedAttack : MonoBehaviour
         }
 
         // If the player has the basic Gun upgrade and the player is not crouching...
-        if (UpgradeManager.instance.GetAttackGun() && !movementScript.GetCrouching())
+        if ((UpgradeManager.instance.GetAttackGun() || UpgradeManager.instance.IsEnabled(Upgrades.ATTACKGUN)) && !movementScript.GetCrouching())
         {
             // Fire a basic bullet upon pressing down the key, and the cooldown timer is at 0
             if (Input.GetKeyDown(key) && cooldownTimer == 0)
@@ -57,7 +57,7 @@ public class PlayerRangedAttack : MonoBehaviour
                 chargeTime = 0; // reset charge time after firing a basic shot
             }
             // If the player has the Charged Shot upgrade and the shoot button is released...
-            else if (UpgradeManager.instance.GetAttackGunCharge() && Input.GetKeyUp(key))
+            else if ((UpgradeManager.instance.GetAttackGunCharge() || UpgradeManager.instance.IsEnabled(Upgrades.ATTACKGUNCHARGE))&& Input.GetKeyUp(key))
             {
                 // Launch a charged bullet if the player has held the shoot key for long enough
                 if (chargeTime >= chargeTimer)

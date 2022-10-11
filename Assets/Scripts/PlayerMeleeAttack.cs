@@ -30,7 +30,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         if (Time.time >= attackCooldown)
         {
-            if (Input.GetKeyDown(attackKey) && UpgradeManager.instance.GetAttackSword() == true &&
+            if (Input.GetKeyDown(attackKey) && (UpgradeManager.instance.GetAttackSword() == true  || UpgradeManager.instance.IsEnabled(Upgrades.ATTACKSWORD))&&
                 movementScript.GetCrouching() == false)
             {
                 MeleeAttack();
