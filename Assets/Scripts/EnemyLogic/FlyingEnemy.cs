@@ -63,6 +63,7 @@ public class FlyingEnemy : MonoBehaviour
             Vector2 offsetVector = _player.transform.position - transform.position;
             _attackRange.offset = offsetVector;
             ChasePlayer();
+            //Flip();
             if (_attackAvailable && (Vector2.Distance(transform.position, _player.transform.position) < _distance / 1.99f))
             {
                 Attack();
@@ -132,8 +133,25 @@ public class FlyingEnemy : MonoBehaviour
             point = transform.position - _player.transform.position;
             point = point.normalized * (_distance / 2f);
         }
+
+        if (transform.position.x <= _player.transform.position.x)
+        {
+            point = new Vector2(-1 * point.x, point.y);
+        }
         return point;
     }
+
+/*    private void Flip()
+    {
+        if (transform.position.x > _player.transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+    }*/
 
     private void DestoryThis()
     {

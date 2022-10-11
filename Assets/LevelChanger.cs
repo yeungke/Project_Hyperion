@@ -14,6 +14,11 @@ public class LevelChanger : MonoBehaviour
         
     }
 
+    public void SetLevel(string level)
+    {
+        _level = level;
+    }
+
     public void FadeToLevel(SpawnLocations spawn)
     {
         PlayerPrefs.SetInt("Spawn", (int) spawn);

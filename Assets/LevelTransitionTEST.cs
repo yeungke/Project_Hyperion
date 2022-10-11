@@ -8,6 +8,7 @@ public class LevelTransitionTEST : MonoBehaviour
     [SerializeField] private GameObject _LevelChange;
     [SerializeField] private SpawnLocations _spawn;
     [SerializeField] private GameObject _prompt;
+    [SerializeField] private string _dest;
 
 
     private void Start()
@@ -27,6 +28,7 @@ public class LevelTransitionTEST : MonoBehaviour
             {
                 LevelChanger lc = _LevelChange.GetComponent<LevelChanger>();
 
+                lc.SetLevel(_dest);
                 lc.FadeToLevel(_spawn);
             }
         }
