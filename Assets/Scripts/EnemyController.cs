@@ -24,6 +24,9 @@ public class EnemyController : MonoBehaviour
     private float nextActionTime = 0.0f;
     public float period = 1.0f;
 
+
+    public GameObject _attackRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +121,18 @@ public class EnemyController : MonoBehaviour
     {
         anim.SetTrigger("killed");
         GameManager.EnemySlain();
+    }
+
+
+    public void Attack()
+    {
+        _attackRange.SetActive(true);
+
+    }
+
+    public void StopAttack()
+    {
+        _attackRange.SetActive(false);
     }
 
     // Update is called once per frame

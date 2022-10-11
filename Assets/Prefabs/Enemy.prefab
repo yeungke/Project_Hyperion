@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2012206649443744013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7818997850560872147}
+  - component: {fileID: 8497896470565850055}
+  - component: {fileID: 2968905520508788281}
+  m_Layer: 0
+  m_Name: attackCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7818997850560872147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012206649443744013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 8624241074708361010}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8497896470565850055
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012206649443744013}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 0.8
+--- !u!114 &2968905520508788281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012206649443744013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647ecfd99c6bf4746a486f2f0b920e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5870954370652759140
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,6 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <PlayerInRange>k__BackingField: 0
   anim: {fileID: 8624241074708361011}
+  _attackCD: 3
+  _canAttack: 1
+  _attackRange: {fileID: 8497896470565850055}
   playerTag: Player
 --- !u!1 &8624241074037043629
 GameObject:
@@ -278,6 +341,7 @@ Transform:
   - {fileID: 8624241074644087214}
   - {fileID: 8624241074037043628}
   - {fileID: 954177933190818281}
+  - {fileID: 7818997850560872147}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -341,6 +405,7 @@ MonoBehaviour:
   moveTime: 3
   waitTime: 2
   period: 1
+  _attackRange: {fileID: 2012206649443744013}
 --- !u!212 &8624241074708361013
 SpriteRenderer:
   m_ObjectHideFlags: 0
