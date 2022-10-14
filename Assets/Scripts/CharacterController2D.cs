@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-	[SerializeField] private float m_JumpForce = 6f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float m_JumpForce = 8f;                            // Amount of force added when the player jumps.
 	[Range(0, 1)][SerializeField] private float m_CrouchSpeed = .4f;            // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;   // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -20,9 +20,18 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
+	[Header("Jump Mechanic Variables")]
+	[Space(10)]
 	private float jumpTimeCounter;
 	public bool isJumping;
 	[SerializeField] private float jumpTime = 0.25f;
+	[SerializeField] private bool secondJump = true;
+
+	// Charge Jump
+	[SerializeField] private float chargeJumpForce;
+	[SerializeField] private float chargeJumpSpeed;
+	[SerializeField] private float chargeJumpTime;
+	private bool isCharging;
 
 	[Header("Events")]
 	[Space]
@@ -72,7 +81,6 @@ public class CharacterController2D : MonoBehaviour
 		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
-			// BUG FIX NEEDED: Collision with ceilings or other enemy colliders on Player's Ceiling Check forces crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_CeilingLayer))
 			{
 				crouch = true;
@@ -141,6 +149,23 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
 		}
 
+		// If the player jumps while they are in the air, after they are no longer going any higher...
+		if (!m_Grounded && secondJump && jump && m_Rigidbody2D.velocity.y <= 0)
+        {
+			// Indicate that the player is jumping, and set the jump time counter again.
+			isJumping = true;
+			jumpTimeCounter = jumpTime;
+			// Change the upward velocity of the player.
+			m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
+			secondJump = false;
+        }
+
+		// Reset the second jump after you land on the ground
+		if (m_Grounded)
+        {
+			secondJump = true;
+        }
+
 		// When the timer is started, run the timer until it hits 0
 		if (jumpTimeCounter > 0)
 			jumpTimeCounter -= Time.deltaTime;
@@ -171,4 +196,9 @@ public class CharacterController2D : MonoBehaviour
 		// Rotate the player on the Y-axis, allowing the player use weapons in the other direction
 		transform.Rotate(0f, 180f, 0f);
 	}
+
+    private void Start()
+    {
+		secondJump = true;
+    }
 }

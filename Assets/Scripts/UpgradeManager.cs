@@ -15,6 +15,7 @@ public class UpgradeManager : MonoBehaviour
 
     // Values that determine the player's upgrades
     [SerializeField] private bool jump;
+    [SerializeField] private bool doubleJump;
     [SerializeField] private bool crouch;
     [SerializeField] private bool crouchJump;
     [SerializeField] private bool crouchAir;
@@ -189,6 +190,10 @@ public class UpgradeManager : MonoBehaviour
     // Jump accessor and mutator
     public bool GetJump() => jump;
     public void SetJump(bool jumpBool) => jump = jumpBool;
+
+    // Double Jump accessor and mutator
+    public bool GetDoubleJump() => doubleJump;
+    public void SetDoubleJump(bool dblJumpBool) => doubleJump = dblJumpBool;
 
     // Crouch accessor and mutator
     public bool GetCrouch() => crouch;

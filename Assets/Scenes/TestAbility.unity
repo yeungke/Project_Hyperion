@@ -409,6 +409,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
+      propertyPath: m_DoubleJumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815979935899393621, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: m_WhatIsCeiling.m_Bits
       value: 512
       objectReference: {fileID: 0}
@@ -462,7 +466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: attackTimer
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9003475720543628539, guid: 19ff4c509e83e954584c4b0b237a7416, type: 3}
       propertyPath: chargeSpeed
@@ -536,6 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 1
+  doubleJump: 1
   crouch: 1
   crouchJump: 0
   crouchAir: 0

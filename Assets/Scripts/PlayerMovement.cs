@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpHold = false;
     [SerializeField] private bool crouch = false;
 
+    [SerializeField] private bool secondJump;
 
     void GetUserInput()
     {
@@ -21,8 +22,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         // If the player presses the jump key, and jump is enabled in the Upgrade Manager
-        //if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
-        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.IsEnabled(Upgrades.JUMP))
+        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
+        //** if (Input.GetButtonDown("Jump") && UpgradeManager.instance.IsEnabled(Upgrades.JUMP))
         {
             // If the player is not crouching, the player jumps, and the jump animation plays
             if (crouch == false)
@@ -31,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("IsJumping", true);
             }
             // If CrouchJump is enabled in the Upgrade Manager, the player can jump while they are crouching
-            if (crouch == true && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
+            //** if (crouch == true && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
+            if (crouch == true && UpgradeManager.instance.GetCrouchJump())
             {
                 jump = true;
             }
@@ -47,6 +49,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
         {
             jumpHold = false;
+        }
+
+        // If the player jumps in the air and they have their double jump
+        if (Input.GetButtonDown("Jump") && controller.m_Grounded == false && UpgradeManager.instance.GetDoubleJump())
+        {
+            jump = true;
+            secondJump = false;
+        }
+        // Reset the double jump upon touching the ground
+        if (controller.m_Grounded == true)
+        {
+            secondJump = true;
         }
 
         // If the player presses the crouch key, and crouch is enabled in the Upgrade Manager
@@ -90,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
         jump = false;
         jumpHold = false;
+        secondJump = true;
     }
 
     // Update is called once per frame
