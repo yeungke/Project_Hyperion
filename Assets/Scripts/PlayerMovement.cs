@@ -22,8 +22,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         // If the player presses the jump key, and jump is enabled in the Upgrade Manager
-        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.GetJump() == true)
-        //** if (Input.GetButtonDown("Jump") && UpgradeManager.instance.IsEnabled(Upgrades.JUMP))
+        if (Input.GetButtonDown("Jump") && UpgradeManager.instance.IsEnabled(Upgrades.JUMP))
         {
             // If the player is not crouching, the player jumps, and the jump animation plays
             if (crouch == false)
@@ -32,8 +31,7 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("IsJumping", true);
             }
             // If CrouchJump is enabled in the Upgrade Manager, the player can jump while they are crouching
-            //** if (crouch == true && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
-            if (crouch == true && UpgradeManager.instance.GetCrouchJump())
+            if (crouch == true && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
             {
                 jump = true;
             }
