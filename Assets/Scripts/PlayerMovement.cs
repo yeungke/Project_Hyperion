@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // If the player jumps in the air and they have their double jump
-        if (Input.GetButtonDown("Jump") && controller.m_Grounded == false && UpgradeManager.instance.GetDoubleJump())
+        if (Input.GetButtonDown("Jump") && controller.m_Grounded == false && UpgradeManager.instance.IsEnabled(Upgrades.DOUBLEJUMP))
         {
             jump = true;
             secondJump = false;

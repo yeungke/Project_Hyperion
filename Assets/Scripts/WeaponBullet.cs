@@ -22,7 +22,7 @@ public class WeaponBullet : MonoBehaviour
         if (enemy != null)
         {
             // if the player doesn't have piercing shot during enemy collision, destroy the bullet
-            if (UpgradeManager.instance.GetAttackGunPierce() == false)
+            if (UpgradeManager.instance.IsEnabled(Upgrades.ATTACKGUNPIERCE))
                 DestroyObject();
             enemy.TakeDamage(damage); // enemy takes damage upon collision with bullet
         }
@@ -39,7 +39,7 @@ public class WeaponBullet : MonoBehaviour
         bool terrain = collision.gameObject.layer == LayerMask.NameToLayer("Terrain");
         //TerrainLayer terrain = collision.GetComponent<TerrainLayer>();
         // If the player doesn't have x-ray shot, destroy the bullet
-        if (terrain == true && UpgradeManager.instance.GetAttackGunXray() == false)
+        if (terrain == true && UpgradeManager.instance.IsEnabled(Upgrades.ATTACKGUNXRAY))
         {
             DestroyObject();
         }
@@ -71,7 +71,7 @@ public class WeaponBullet : MonoBehaviour
         rb.velocity = transform.right * speed;
 
         // If the player has the Long Gun Attack upgrade, increase the range of the bullet
-        if (UpgradeManager.instance.GetAttackGunLong() == true)
+        if (UpgradeManager.instance.IsEnabled(Upgrades.ATTACKGUNLONG))
             maxDistance = 5f;
         else
             maxDistance = 2.5f;

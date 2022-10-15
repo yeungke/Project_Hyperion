@@ -5,7 +5,9 @@ using UnityEngine;
 public enum Upgrades 
 { 
     NULL,
-    JUMP, 
+    JUMP,
+    DOUBLEJUMP,
+    CHARGEJUMP,
     CROUCH, 
     CROUCHJUMP, 
     CROUCHAIR, 
@@ -13,6 +15,7 @@ public enum Upgrades
     ATTACKGUN, 
     ATTACKGUNCHARGE, 
     ATTACKGUNLONG, 
-    ATTACKGUNPIERCE 
+    ATTACKGUNPIERCE,
+    ATTACKGUNXRAY
 
 }

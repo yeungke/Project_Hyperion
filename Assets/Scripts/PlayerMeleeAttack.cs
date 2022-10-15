@@ -22,7 +22,7 @@ public class PlayerMeleeAttack : MonoBehaviour
 
         if (upgrade != null)
         {
-            UpgradeManager.instance.SetAttackSword(true);
+            UpgradeManager.instance.EnableUpgrade(Upgrades.ATTACKSWORD);
         }
     }
 
@@ -30,7 +30,7 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         if (Time.time >= attackCooldown)
         {
-            if (Input.GetKeyDown(attackKey) && (UpgradeManager.instance.GetAttackSword() == true  || UpgradeManager.instance.IsEnabled(Upgrades.ATTACKSWORD))&&
+            if (Input.GetKeyDown(attackKey) && UpgradeManager.instance.IsEnabled(Upgrades.ATTACKSWORD) &&
                 movementScript.GetCrouching() == false)
             {
                 MeleeAttack();
