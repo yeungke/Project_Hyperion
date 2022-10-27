@@ -22,6 +22,8 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] private Type _type;
     [SerializeField] private CapsuleCollider2D _attackRange;
 
+    [SerializeField] private BoxCollider2D _bodyCollider;
+
     [SerializeField] private float _attackCD;
     private bool _attackAvailable;
 
@@ -32,7 +34,8 @@ public class FlyingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _attackRange = GetComponent<CapsuleCollider2D>();
+        _attackRange = GetComponentInChildren<CapsuleCollider2D>();
+        _bodyCollider = GetComponent<BoxCollider2D>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _attackAvailable = true;
         if (_type == Type.MELEE)
@@ -91,6 +94,7 @@ public class FlyingEnemy : MonoBehaviour
             DestoryThis();
         }
     }
+
 
     public void TakeDamage(int dmg)
     {

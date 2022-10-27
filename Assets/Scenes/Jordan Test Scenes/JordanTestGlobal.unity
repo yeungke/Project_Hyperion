@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jump: 0
+  doubleJump: 0
   crouch: 0
   crouchJump: 0
   crouchAir: 0

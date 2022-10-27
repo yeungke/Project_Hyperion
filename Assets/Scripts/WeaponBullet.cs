@@ -30,7 +30,7 @@ public class WeaponBullet : MonoBehaviour
         FlyingEnemy fe = collision.GetComponent<FlyingEnemy>();
         if (fe != null)
         {
-            fe.TakeDamage(2);
+            fe.TakeDamage(damage);
             DestroyObject();
 
         }
