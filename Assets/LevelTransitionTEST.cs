@@ -17,6 +17,11 @@ public class LevelTransitionTEST : MonoBehaviour
         {
             _prompt = transform.GetChild(0).gameObject;
         }
+
+        if (_LevelChange == null)
+        {
+            _LevelChange = GameObject.Find("LevelChanger");
+        }
     }
 
     // Update is called once per frame

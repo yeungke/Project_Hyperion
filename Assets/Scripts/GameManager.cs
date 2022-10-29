@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     //
-    [SerializeField] private int _life = 100;
+
+    [SerializeField] private int _maxHP = 100;
+    [SerializeField] private int _life;
     [SerializeField] private int _numEnemies = 0;
 
     //debug mode
@@ -84,6 +86,11 @@ public class GameManager : MonoBehaviour
     public static void DamageTaken(int dmg)
     {
         _instance._life -= dmg;
+    }
+
+    private void Awake()
+    {
+        _life = _maxHP;
     }
 
     // Start is called before the first frame update

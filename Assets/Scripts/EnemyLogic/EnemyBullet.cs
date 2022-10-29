@@ -15,6 +15,11 @@ public class EnemyBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CircleCollider2D col = GetComponent<CircleCollider2D>();
+        if (col != null)
+        {
+            col.isTrigger = true;
+        }
         _rb.velocity = transform.right * _speed;
         _maxDistance = 3.25f;
         _distance = 0f;

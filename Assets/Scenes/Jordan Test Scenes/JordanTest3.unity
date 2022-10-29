@@ -701,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 138707356289168650, guid: 25e574bc33b0a8e4aaae7254c310127b, type: 3}
       propertyPath: _dest
-      value: JordanTest1
+      value: Zone1_4
       objectReference: {fileID: 0}
     - target: {fileID: 138707356289168650, guid: 25e574bc33b0a8e4aaae7254c310127b, type: 3}
       propertyPath: _spawn

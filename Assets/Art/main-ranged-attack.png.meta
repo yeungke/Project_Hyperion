@@ -1,28 +1,34 @@
 fileFormatVersion: 2
-guid: 26a767ec8ca3a34419dee8df121df24f
+guid: 3d141a42f576f394c8d3efd5a64a00aa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6680790825509562763
-    second: main-jump_0
+      213: 8342185969149913303
+    second: main-ranged-attack_0
   - first:
-      213: 776611299863507008
-    second: main-jump_1
+      213: -6912596062239243687
+    second: main-ranged-attack_1
   - first:
-      213: -7799743526955720783
-    second: main-jump_2
+      213: 3414959162479472846
+    second: main-ranged-attack_2
   - first:
-      213: 5377011357187655741
-    second: main-jump_3
+      213: 5875459247698110172
+    second: main-ranged-attack_3
   - first:
-      213: -2760261833443340393
-    second: main-jump_4
+      213: 8859541073228651682
+    second: main-ranged-attack_4
   - first:
-      213: -6816918962882145020
-    second: main-jump_5
+      213: -7085408969521693526
+    second: main-ranged-attack_5
   - first:
-      213: 3302851359357958005
-    second: main-jump_6
+      213: -3723941127620183318
+    second: main-ranged-attack_6
+  - first:
+      213: 2808246165014725959
+    second: main-ranged-attack_7
+  - first:
+      213: 490092889523659391
+    second: main-ranged-attack_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -69,7 +75,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -89,7 +95,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,7 +107,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,148 +118,190 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: main-jump_0
+      name: main-ranged-attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57650daf3201943a0800000000000000
-      internalID: -6680790825509562763
+      spriteID: 7d8ad6da0f565c370800000000000000
+      internalID: 8342185969149913303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_1
+      name: main-ranged-attack_1
       rect:
         serializedVersion: 2
-        x: 10
+        x: 16
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0403be0dcd317ca00800000000000000
-      internalID: 776611299863507008
+      spriteID: 952477281868110a0800000000000000
+      internalID: -6912596062239243687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_2
+      name: main-ranged-attack_2
       rect:
         serializedVersion: 2
-        x: 20
+        x: 48
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bfd6a8469eb1c390800000000000000
-      internalID: -7799743526955720783
+      spriteID: ec0fd0ad34f546f20800000000000000
+      internalID: 3414959162479472846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_3
+      name: main-ranged-attack_3
       rect:
         serializedVersion: 2
-        x: 30
+        x: 71
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d38496a375bfe9a40800000000000000
-      internalID: 5377011357187655741
+      spriteID: cd664576e03d98150800000000000000
+      internalID: 5875459247698110172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_4
+      name: main-ranged-attack_4
       rect:
         serializedVersion: 2
-        x: 40
+        x: 95
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79f8a8aac7491b9d0800000000000000
-      internalID: -2760261833443340393
+      spriteID: 2acd6ce8aa963fa70800000000000000
+      internalID: 8859541073228651682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_5
+      name: main-ranged-attack_5
       rect:
         serializedVersion: 2
-        x: 50
+        x: 126
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40519c222507561a0800000000000000
-      internalID: -6816918962882145020
+      spriteID: aacfa4315129bad90800000000000000
+      internalID: -7085408969521693526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main-jump_6
+      name: main-ranged-attack_6
       rect:
         serializedVersion: 2
-        x: 60
+        x: 151
         y: 0
-        width: 10
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.25, y: 0.625}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5777274efc516dd20800000000000000
-      internalID: 3302851359357958005
+      spriteID: aea3bb35647e15cc0800000000000000
+      internalID: -3723941127620183318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main-ranged-attack_7
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 0
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.33, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7454e832205e8f620800000000000000
+      internalID: 2808246165014725959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main-ranged-attack_8
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 0
+        width: 14
+        height: 24
+      alignment: 9
+      pivot: {x: 0.35, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f72a00be2e82dc600800000000000000
+      internalID: 490092889523659391
       vertices: []
       indices: 
       edges: []

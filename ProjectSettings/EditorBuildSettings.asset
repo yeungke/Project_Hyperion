@@ -5,7 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Jordan Test Scenes/JordanTestGlobal.unity
+    guid: 1795c86c162111f43851f4b50c8fbdd5
+  - enabled: 1
+    path: Assets/Scenes/Jordan Test Scenes/JordanTest1.unity
+    guid: 18f5b3e8cf143ba4f9da620d009ee6cb
+  - enabled: 1
+    path: Assets/Scenes/Jordan Test Scenes/JordanTest3.unity
+    guid: 07ff210e6db31704f9e7114808bf8028
+  - enabled: 1
+    path: Assets/Scenes/Jordan Test Scenes/JordanTest2.unity
+    guid: 7f897a93daedcb44aa80d6ae839008c9
+  - enabled: 1
+    path: Assets/Scenes/Zone1/Zone1_4.unity
+    guid: b85dad14d841c8a42826bd01788b563c
   m_configObjects: {}

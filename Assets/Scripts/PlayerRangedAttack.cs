@@ -52,6 +52,7 @@ public class PlayerRangedAttack : MonoBehaviour
             // Fire a basic bullet upon pressing down the key, and the cooldown timer is at 0
             if (Input.GetKeyDown(key) && cooldownTimer == 0)
             {
+                animator.SetTrigger("RangedAttackTrigger");
                 Invoke("LaunchProjectile", attackBuffer);
                 cooldownTimer += attackTimer;
                 chargeTime = 0; // reset charge time after firing a basic shot

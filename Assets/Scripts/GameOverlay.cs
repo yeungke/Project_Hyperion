@@ -12,6 +12,8 @@ public class GameOverlay : View
     [SerializeField] private ViewManager _viewManager;
 
 
+    [SerializeField] private Slider _healthbar;
+
     public override void Initialize()
     {
         _pauseButton.onClick.AddListener(() => _viewManager.Show<PauseMenu>());
@@ -27,12 +29,26 @@ public class GameOverlay : View
     // Update is called once per frame
     void Update()
     {
-        _lifeText.text = "Life: " + GameManager.LifeUIUpdate().ToString(); ;
+        //_lifeText.text = "Life: " + GameManager.LifeUIUpdate().ToString(); ;
 
         if (Input.GetButtonDown("Cancel"))
         {
             _viewManager.Show<PauseMenu>();
             GameManager.Pause();
+        }
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (GameManager.LifeUIUpdate() > 0)
+        {
+            _healthbar.value = GameManager.LifeUIUpdate();
+        }
+        else
+        {
+            _healthbar.value = 0;
         }
     }
 }

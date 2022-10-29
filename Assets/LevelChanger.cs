@@ -33,6 +33,11 @@ public class LevelChanger : MonoBehaviour
     private void Awake()
     {
         GameObject player = GameObject.Find("Player");
+
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
         if (player != null && PlayerPrefs.HasKey("Spawn"))
         {
             bool spawnPointFound = false;

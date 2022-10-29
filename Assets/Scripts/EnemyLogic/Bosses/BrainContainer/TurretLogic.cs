@@ -62,7 +62,14 @@ public class TurretLogic : MonoBehaviour
 
     private void Aim()
     {
-        _turret.transform.right = _player.transform.position - transform.position;
+        //_turret.transform.right = _player.transform.position - transform.position;
+        Vector2 relativepos = _player.transform.position - transform.position;
+
+        float angle = Mathf.Atan2(relativepos.y, relativepos.x) * Mathf.Rad2Deg;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        _turret.transform.rotation = rotation;
     }
 
     public void Attack()
