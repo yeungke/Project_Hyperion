@@ -10,6 +10,10 @@ public class LevelTransitionTEST : MonoBehaviour
     [SerializeField] private GameObject _prompt;
     [SerializeField] private string _dest;
 
+    [SerializeField] private Animator _animator;
+
+    [SerializeField] private bool _locked;
+
 
     private void Start()
     {
@@ -22,6 +26,14 @@ public class LevelTransitionTEST : MonoBehaviour
         {
             _LevelChange = GameObject.Find("LevelChanger");
         }
+
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+
+        _locked = false;
+        _animator.SetBool("locked", _locked);
     }
 
     // Update is called once per frame
@@ -54,6 +66,7 @@ public class LevelTransitionTEST : MonoBehaviour
             {
                 _prompt.SetActive(true);
             }
+            _animator.SetBool("open", true);
             Debug.Log("Triggered");
 
 /*            LevelChanger lc = _LevelChange.GetComponent<LevelChanger>();
@@ -72,6 +85,7 @@ public class LevelTransitionTEST : MonoBehaviour
             {
                 _prompt.SetActive(false);
             }
+            _animator.SetBool("open", false);
         }
     }
 }
