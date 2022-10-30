@@ -5,13 +5,14 @@ using UnityEngine;
 public class UpgradeBlock : MonoBehaviour
 {
     public Upgrades _upgrade;
-    public void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField] private GameObject _prompt;
+    /*public void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("collide");
         PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
 
         if (player != null)
-        {
+        {*//*
             //Debug.Log("break");
             if (!UpgradeManager.instance.HasUpgrade(_upgrade))
             {
@@ -20,7 +21,34 @@ public class UpgradeBlock : MonoBehaviour
                 //temp
                 UpgradeManager.instance.EnableUpgrade(_upgrade);
             }
-            DestroyObject();
+            DestroyObject();*//*
+        }
+    }*/
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+
+        if (player != null)
+        {
+            if (!_prompt.activeSelf)
+            {
+                _prompt.SetActive(true);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+
+        if (player != null)
+        {
+            if (_prompt.activeSelf)
+            {
+                _prompt.SetActive(false);
+            }
         }
     }
 
@@ -32,7 +60,21 @@ public class UpgradeBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_prompt.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //Debug.Log("break");
+                if (!UpgradeManager.instance.HasUpgrade(_upgrade))
+                {
+                    UpgradeManager.instance.AddUpgrade(_upgrade);
+
+                    //temp
+                    UpgradeManager.instance.EnableUpgrade(_upgrade);
+                }
+                DestroyObject();
+            }
+        }
     }
     private void Start()
     {
