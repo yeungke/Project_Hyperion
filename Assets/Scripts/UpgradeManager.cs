@@ -26,6 +26,43 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private bool attackGunPierce;
     [SerializeField] private bool attackGunXray;
 
+
+    public List<Upgrade> GetActiveUpgrades()
+    {
+        //return _upgradesList;
+
+        List<Upgrade> activeUpgrades = new List<Upgrade>();
+
+        foreach (DictionaryEntry item in _upgradesList)
+        {
+            Upgrade upgrade = (Upgrade)item.Value;
+            if (upgrade._enabled && upgrade._pickedUp)
+            {
+                activeUpgrades.Add(upgrade);
+            }
+        }
+
+        return activeUpgrades;
+    }
+
+    public List<Upgrade> GetPickedUpUpgrades()
+    {
+
+        List<Upgrade> pickedUpUpgrades = new List<Upgrade>();
+
+        foreach (DictionaryEntry item in _upgradesList)
+        {
+            Upgrade upgrade = (Upgrade)item.Value;
+            if (upgrade._pickedUp)
+            {
+                pickedUpUpgrades.Add(upgrade);
+            }
+        }
+
+        return pickedUpUpgrades;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +89,60 @@ public class UpgradeManager : MonoBehaviour
             Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
             _upgradesList.Add((Upgrades) i, upgrade);
             Debug.Log(_upgradesList[(Upgrades)i].ToString());
+        }
+    }
+
+    public void LoadFromSave(List<string> active, List<string> pickedUp)
+    {
+        _upgradesList = new Hashtable();
+        for (int i = 0; i < System.Enum.GetValues(typeof(Upgrades)).Length; i++)
+        {
+            Upgrade upgrade = new Upgrade((Upgrades)i, false, false);
+            _upgradesList.Add((Upgrades)i, upgrade);
+            Debug.Log(_upgradesList[(Upgrades)i].ToString());
+        }
+
+        foreach (string upgrade in pickedUp)
+        {
+            Upgrades type;//= (Upgrades)System.Enum.Parse(typeof(Upgrades), upgrade);
+            if (System.Enum.TryParse(upgrade, out type))
+            {
+                AddUpgrade(type);
+                /*UpgradeListView upgradeUI = Object.FindObjectOfType<UpgradeListView>();
+
+                if (!instance._upgradesList.ContainsKey(type))
+                {
+                    Upgrade upgrade = new Upgrade(type, true, false);
+                    _upgradesList.Add(type, upgrade);
+                    Debug.Log(_upgradesList[type].ToString());
+                    if (upgradeUI != null)
+                    {
+                        Debug.Log("checkl");
+                        upgradeUI.PickedUpUpgrade(type);
+                    }
+                }
+                else
+                {
+                    Upgrade upgrade = (Upgrade)_upgradesList[type];
+                    upgrade._pickedUp = true;
+                    _upgradesList[type] = upgrade;
+                    Debug.Log(_upgradesList[type].ToString());
+                    if (upgradeUI != null)
+                    {
+                        Debug.Log("check2");
+                        upgradeUI.PickedUpUpgrade(type);
+                    }
+                }*/
+            }
+        }
+
+        foreach (string upgrade in active)
+        {
+            Upgrades type;
+            if (System.Enum.TryParse(upgrade, out type))
+            {
+                EnableUpgrade(type);
+            }
         }
     }
 
@@ -105,19 +196,6 @@ public class UpgradeManager : MonoBehaviour
 
     public void AddUpgrade(Upgrades type)
     {
-        /*foreach (Upgrade upgrade in _upgrades)
-        {
-            if (upgrade._upgradeType == type)
-            {
-                upgrade._pickedUp = true;
-
-                //temp - delete later
-                upgrade._enabled = true;
-                break;
-            }
-        }*/
-
-        //UpgradeListView upgradeUI = GameObject.Find("Upgrade_UI").GetComponent<UpgradeListView>();
 
         UpgradeListView upgradeUI = Object.FindObjectOfType<UpgradeListView>();
 

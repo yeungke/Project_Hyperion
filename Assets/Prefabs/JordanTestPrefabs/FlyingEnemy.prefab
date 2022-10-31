@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8459251916011545004}
   - component: {fileID: 2694257861481030127}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FollowRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 4657322969379339036}
   - component: {fileID: 8009958508837598607}
   - component: {fileID: 1953166409266330097}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.7, y: 0.9}
+    oldSize: {x: 0.7, y: 1.6}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -234,7 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4657322969622827612}
   - component: {fileID: 4657322969622827613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}

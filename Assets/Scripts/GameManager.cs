@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,70 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         
         //LevelManager.SwitchSceneToMenu();
+    }
+
+    public static void Reload() 
+    {
+        int maxHP = PlayerPrefs.GetInt("Save_MAXHP", 100);
+        int currentHP = PlayerPrefs.GetInt("Save_CURRENTHP", 100);
+        List<string> activeUpgrades = new List<string>(PlayerPrefs.GetString("Save_ACTIVEUPGRADES", "").Split(','));
+        List<string> pickedUpgrades = new List<string>(PlayerPrefs.GetString("Save_PICKEDUPGRADES", "").Split(','));
+
+        UpgradeManager.instance.LoadFromSave(activeUpgrades, pickedUpgrades);
+        _instance._maxHP = maxHP;
+        _instance._life = currentHP;
+
+
+        int scene = PlayerPrefs.GetInt("Save_SCENE", 0);
+        SceneManager.LoadSceneAsync(scene);
+    }
+
+
+    public static void ClearSave()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
+    // put in checkpoint object
+    public static void Save(int sceneIndex)
+    {
+        PlayerPrefs.SetInt("Save_MAXHP", _instance._maxHP);
+        PlayerPrefs.SetInt("Save_CURRENTHP", _instance._life);
+
+        List<Upgrade> pickedUpUpgrades = UpgradeManager.instance.GetPickedUpUpgrades();
+        List<Upgrade> activeUpgrades = UpgradeManager.instance.GetActiveUpgrades();
+
+        string pickedUpgradeString = "";
+        string activeUpgradeString = "";
+        for (int i = 0; i < pickedUpUpgrades.Count; i++)
+        {
+            if (i != pickedUpUpgrades.Count - 1)
+            {
+                pickedUpgradeString += pickedUpUpgrades[i]._upgradeType + ",";
+            }
+            else
+            {
+                pickedUpgradeString += pickedUpUpgrades[i]._upgradeType;
+            }
+        }
+
+        for (int i = 0; i < activeUpgrades.Count; i++)
+        {
+
+            if (i != activeUpgrades.Count - 1)
+            {
+                activeUpgradeString += activeUpgrades[i]._upgradeType + ",";
+            }
+            else
+            {
+                activeUpgradeString += activeUpgrades[i]._upgradeType;
+            }
+        }
+
+        PlayerPrefs.SetString("Save_PICKEDUPGRADES", pickedUpgradeString);
+        PlayerPrefs.SetString("Save_ACTIVEUPGRADES", activeUpgradeString);
+
+        PlayerPrefs.SetInt("Save_SCENE", sceneIndex);
     }
 
     public static void Play()

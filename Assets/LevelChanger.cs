@@ -32,6 +32,8 @@ public class LevelChanger : MonoBehaviour
 
     private void Awake()
     {
+
+        GameManager.Play();
         GameObject player = GameObject.Find("Player");
 
         if (_animator == null)

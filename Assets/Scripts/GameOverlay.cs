@@ -49,6 +49,8 @@ public class GameOverlay : View
         else
         {
             _healthbar.value = 0;
+            _viewManager.Show<GameOverMenu>();
+            GameManager.Pause();
         }
     }
 }

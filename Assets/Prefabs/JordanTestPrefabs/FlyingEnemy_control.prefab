@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 182907034750989738}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingEnemy_control
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 182907035804337476}
   - component: {fileID: 182907035804337499}
   - component: {fileID: 182907035804337498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1878442536066997560}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
