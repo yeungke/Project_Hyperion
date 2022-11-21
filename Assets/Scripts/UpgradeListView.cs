@@ -13,6 +13,8 @@ public class UpgradeListView : MonoBehaviour
     public Transform _targetTransform;
     public Button _closeButton;
 
+    public Text _upgradeCounter;
+
 
     public void Initialize()
     {
@@ -67,7 +69,7 @@ public class UpgradeListView : MonoBehaviour
             _viewManager.ShowView();
             DestroyObject();
         }
-
+        _upgradeCounter.text = UpgradeManager.instance.getUpgradeCount();
     }
 
     public void Prime(List<Upgrade> upgrades)

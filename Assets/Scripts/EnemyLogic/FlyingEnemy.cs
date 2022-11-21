@@ -17,6 +17,8 @@ public class FlyingEnemy : MonoBehaviour
     [SerializeField] private GameObject _bullet;
     public int _health;
 
+    private Animator _animator;
+
 
     [SerializeField] private Transform _aimer;
     [SerializeField] private Type _type;
@@ -34,6 +36,8 @@ public class FlyingEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _animator = gameObject.GetComponent<Animator>();
+
         _attackRange = GetComponentInChildren<CapsuleCollider2D>();
         _bodyCollider = GetComponent<BoxCollider2D>();
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -125,6 +129,17 @@ public class FlyingEnemy : MonoBehaviour
         this.transform.position = Vector2.MoveTowards(current, newPos, _speed * Time.deltaTime);
 
         _aimer.transform.right = _player.transform.position - transform.position;
+
+        if (_player.transform.position.x > gameObject.transform.position.x)
+        {
+            _animator.SetBool("MoveR", true);
+            _animator.SetBool("MoveL", false);
+        }
+        else
+        {
+            _animator.SetBool("MoveL", true);
+            _animator.SetBool("MoveR", false);
+        }
 
         //this.transform.position = Vector2.MoveTowards(current, target, _speed * Time.deltaTime);
     }

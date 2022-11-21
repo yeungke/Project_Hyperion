@@ -116,7 +116,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8556619, y: 0.29896343}
+  m_Size: {x: 0.4, y: 0.29896343}
   m_EdgeRadius: 0
 --- !u!114 &2074199607301806162
 MonoBehaviour:
@@ -134,7 +134,6 @@ MonoBehaviour:
   anim: {fileID: 8624241074708361011}
   _attackCD: 3
   _canAttack: 1
-  _attackRange: {fileID: 8497896470565850055}
   playerTag: Player
 --- !u!1 &8624241074037043629
 GameObject:

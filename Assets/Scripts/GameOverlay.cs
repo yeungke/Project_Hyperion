@@ -13,6 +13,8 @@ public class GameOverlay : View
 
 
     [SerializeField] private Slider _healthbar;
+    [SerializeField] private Slider _bossHealthbar;
+    [SerializeField] private GameObject _bossHealthbarContainer;
 
     public override void Initialize()
     {
@@ -38,6 +40,16 @@ public class GameOverlay : View
         }
 
         UpdateHealthBar();
+    }
+
+    public void BossRoom()
+    {
+        _bossHealthbarContainer.SetActive(true);
+    }
+
+    public void UpdateBossHealthBar(float val)
+    {
+        _bossHealthbar.value = val;
     }
 
     private void UpdateHealthBar()

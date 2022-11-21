@@ -27,6 +27,19 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private bool attackGunXray;
 
 
+    [SerializeField] private int _maxUpgradeSlots;
+    [SerializeField] private int _upgradeSlots;
+
+    public string getUpgradeCount()
+    {
+        return $"{_upgradeSlots}/{_maxUpgradeSlots}";
+    }
+
+    public bool GetFreeSlot()
+    {
+        return _upgradeSlots < _maxUpgradeSlots;
+    }
+
     public List<Upgrade> GetActiveUpgrades()
     {
         //return _upgradesList;
@@ -66,6 +79,9 @@ public class UpgradeManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _maxUpgradeSlots = 8;
+        _upgradeSlots = 0;
+
         // Singleton pattern instance
         if (instance == null)
             instance = this;
@@ -94,6 +110,8 @@ public class UpgradeManager : MonoBehaviour
 
     public void LoadFromSave(List<string> active, List<string> pickedUp)
     {
+
+        _maxUpgradeSlots = PlayerPrefs.GetInt("MaxUpgradeSlots", 8);
         _upgradesList = new Hashtable();
         for (int i = 0; i < System.Enum.GetValues(typeof(Upgrades)).Length; i++)
         {
@@ -176,27 +194,10 @@ public class UpgradeManager : MonoBehaviour
             Debug.Log($"{upgrade._pickedUp}");
             return upgrade._pickedUp;
         }
-        /*foreach (Upgrade u in _upgrades)
-        {
-            if (u._upgradeType == type)
-            {
-                if (u._pickedUp)
-                {
-                    hasUpgrade = true;
-                    break;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }*/
-        //return hasUpgrade;
     }
 
     public void AddUpgrade(Upgrades type)
     {
-
         UpgradeListView upgradeUI = Object.FindObjectOfType<UpgradeListView>();
 
         if (!_upgradesList.ContainsKey(type))
@@ -226,15 +227,19 @@ public class UpgradeManager : MonoBehaviour
 
     public void EnableUpgrade(Upgrades type)
     {
-        if (_upgradesList.ContainsKey(type))
+        if (_upgradeSlots != _maxUpgradeSlots)
         {
-            Upgrade upgrade = (Upgrade)_upgradesList[type];
-
-            if (upgrade._pickedUp)
+            if (_upgradesList.ContainsKey(type))
             {
-                upgrade._enabled = true;
-                _upgradesList[type] = upgrade;
-                Debug.Log(_upgradesList[type].ToString());
+                Upgrade upgrade = (Upgrade)_upgradesList[type];
+
+                if (upgrade._pickedUp)
+                {
+                    upgrade._enabled = true;
+                    _upgradesList[type] = upgrade;
+                    Debug.Log(_upgradesList[type].ToString());
+                    _upgradeSlots++;
+                }
             }
         }
     }
@@ -250,6 +255,7 @@ public class UpgradeManager : MonoBehaviour
                 upgrade._enabled = false;
                 _upgradesList[type] = upgrade;
                 Debug.Log(_upgradesList[type].ToString());
+                _upgradeSlots--;
             }
         }
     }

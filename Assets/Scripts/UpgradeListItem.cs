@@ -77,9 +77,12 @@ public class UpgradeListItem : MonoBehaviour
             }
             else
             {
-                _upgrade._enabled = true;
-                _upgradeText.color = new Color(0f, 1f, 0f, 1f);
-                UpgradeManager.instance.EnableUpgrade(_upgrade._upgradeType);
+                if (UpgradeManager.instance.GetFreeSlot())
+                {
+                    _upgrade._enabled = true;
+                    _upgradeText.color = new Color(0f, 1f, 0f, 1f);
+                    UpgradeManager.instance.EnableUpgrade(_upgrade._upgradeType);
+                }
             }
         }
     }

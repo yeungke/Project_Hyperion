@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5559584678022518386, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
+      propertyPath: _bossHealthbarContainer
+      value: 
+      objectReference: {fileID: 192859356}
     - target: {fileID: 5559584679538749944, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
       propertyPath: m_Name
       value: UI_Group
@@ -220,6 +224,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
+--- !u!114 &192859355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5559584678022518386, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
+  m_PrefabInstance: {fileID: 192859354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c4551da48bb7ab4a96693f0198ec04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &192859356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4960756168543759597, guid: 7dd79b6ba27b20145a942823d18272fb, type: 3}
+  m_PrefabInstance: {fileID: 192859354}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &719828323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,6 +666,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4170961672646464548, guid: 032020bcfba65b642b1fbc029b667bb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290602061597642210, guid: 032020bcfba65b642b1fbc029b667bb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6840334101128366352, guid: 032020bcfba65b642b1fbc029b667bb6, type: 3}
       propertyPath: _player
       value: 
@@ -706,6 +734,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7948935609615522186, guid: 032020bcfba65b642b1fbc029b667bb6, type: 3}
+      propertyPath: _gameUI
+      value: 
+      objectReference: {fileID: 192859355}
     - target: {fileID: 7948935609615522186, guid: 032020bcfba65b642b1fbc029b667bb6, type: 3}
       propertyPath: _player
       value: 

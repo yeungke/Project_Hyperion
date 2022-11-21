@@ -35,6 +35,13 @@ public class WeaponBullet : MonoBehaviour
 
         }
 
+        BrainContainer bc = collision.GetComponent<BrainContainer>();
+        if (bc != null)
+        {
+            bc.TakeDamage(damage);
+            DestroyObject();
+        }
+
         // Detect terrain layer
         bool terrain = collision.gameObject.layer == LayerMask.NameToLayer("Terrain");
         //TerrainLayer terrain = collision.GetComponent<TerrainLayer>();

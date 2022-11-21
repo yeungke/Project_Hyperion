@@ -16,12 +16,15 @@ public class BrainContainer : MonoBehaviour, Boss
 
     [SerializeField] private Phases _phase;
 
+    [SerializeField] private GameOverlay _gameUI;
+
     private bool _attackAvailable = false;
     private float _icd;
 
     // Start is called before the first frame update
     void Start()
     {
+        _gameUI.BossRoom();
         _icd = 1.5f;
         _currentHP = _maxHP;
         _phase = Phases.PHASE1;
@@ -47,12 +50,28 @@ public class BrainContainer : MonoBehaviour, Boss
         {
             Fight();
         }
+        if (_currentHP <= 0)
+        {
+            DestoryThis();
+        }
 
+    }
+
+
+
+    private void DestoryThis()
+    {
+        Destroy(this.gameObject);
     }
 
     public void TakeDamage(int dmg)
     {
-        _currentHP -= dmg;
+
+        
+        _currentHP -= dmg * 5;
+        _gameUI.UpdateBossHealthBar(_currentHP);
+
+        Debug.Log($"Current BOSS hp: {_currentHP}");
         PhaseCheck();
 
     }
@@ -128,15 +147,27 @@ public class BrainContainer : MonoBehaviour, Boss
             if (_attackAvailable)
             {
                 _attackAvailable = false;
-                foreach (TurretLogic item in _turretsLeft)
+                if (_phase != Phases.PHASE3 && _phase != Phases.PHASE4)
                 {
-                    if (item.GetAttackAvailable())
+                    foreach (TurretLogic item in _turretsLeft)
                     {
-                        item.Attack();
-                        break;
+                        if (item.GetAttackAvailable())
+                        {
+                            item.Attack();
+                            StartCoroutine(Cooldown());
+                            break;
+                        }
                     }
                 }
-                StartCoroutine(Cooldown());
+                else
+                {
+                    int r = Random.Range(0, _turretsRight.Length - 1);
+                    if (_turretsLeft[r].GetAttackAvailable())
+                    {
+                        _turretsLeft[r].Attack();
+                        StartCoroutine(Cooldown());
+                    }
+                }
             }
         }
         else
@@ -152,16 +183,30 @@ public class BrainContainer : MonoBehaviour, Boss
             if (_attackAvailable)
             {
                 _attackAvailable = false;
-                foreach (TurretLogic item in _turretsRight)
+                if (_phase != Phases.PHASE3 && _phase != Phases.PHASE4)
                 {
-                    if (item.GetAttackAvailable())
+                    foreach (TurretLogic item in _turretsRight)
                     {
-                        item.Attack();
-                        break;
+                        if (item.GetAttackAvailable())
+                        {
+                            item.Attack();
+                            StartCoroutine(Cooldown());
+                            break;
+                        }
                     }
                 }
-                StartCoroutine(Cooldown());
+                else
+                {
+                    int r = Random.Range(0, _turretsRight.Length - 1);
+                    if (_turretsRight[r].GetAttackAvailable())
+                    {
+                        _turretsRight[r].Attack();
+                        StartCoroutine(Cooldown());
+                    }
+                }
             }
         }
     }
+
+    
 }
