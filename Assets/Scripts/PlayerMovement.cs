@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpHold = false;
     [SerializeField] private bool crouch = false;
 
-    [SerializeField] private bool secondJump;
-
     void GetUserInput()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -49,18 +47,6 @@ public class PlayerMovement : MonoBehaviour
             jumpHold = false;
         }
 
-        // If the player jumps in the air and they have their double jump
-        if (Input.GetButtonDown("Jump") && controller.m_Grounded == false && UpgradeManager.instance.IsEnabled(Upgrades.DOUBLEJUMP))
-        {
-            jump = true;
-            secondJump = false;
-        }
-        // Reset the double jump upon touching the ground
-        if (controller.m_Grounded == true)
-        {
-            secondJump = true;
-        }
-
         // If the player presses the crouch key, and crouch is enabled in the Upgrade Manager
         if (Input.GetButtonDown("Crouch") && UpgradeManager.instance.IsEnabled(Upgrades.CROUCH))
         {
@@ -68,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Crouch") && controller.m_Grounded == true)
                 crouch = true;
             // If CrouchAir is enabled in the Upgrade Manager, the player can crouch when they are not grounded
-            else if (controller.m_Grounded == false && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHAIR))
+            else if (controller.m_Grounded == false && UpgradeManager.instance.IsEnabled(Upgrades.CROUCHJUMP))
                 crouch = true;
         }
         else if (Input.GetButtonUp("Crouch"))
@@ -102,7 +88,6 @@ public class PlayerMovement : MonoBehaviour
     {
         jump = false;
         jumpHold = false;
-        secondJump = true;
     }
 
     // Update is called once per frame
@@ -113,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        controller.SlopeCheck();
         MoveController();
     }
 }

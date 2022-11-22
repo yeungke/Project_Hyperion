@@ -16,6 +16,7 @@ public class WeaponBullet : MonoBehaviour
     {
         // Prints the name of the Object the bullet collides with, for debugging purposes
         Debug.Log(collision.name);
+        Debug.Log(LayerMask.LayerToName(collision.gameObject.layer));
 
         // Detect enemy object
         EnemyController enemy = collision.GetComponent<EnemyController>();

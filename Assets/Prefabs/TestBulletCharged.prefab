@@ -139,3 +139,6 @@ MonoBehaviour:
   rb: {fileID: 6559760982362507225}
   maxDistance: 2.5
   objectDistance: 0
+  terrain:
+    serializedVersion: 2
+    m_Bits: 256

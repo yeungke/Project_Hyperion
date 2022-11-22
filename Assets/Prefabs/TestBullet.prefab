@@ -102,6 +102,9 @@ MonoBehaviour:
   rb: {fileID: -6172204741817407672}
   maxDistance: 2.5
   objectDistance: 0
+  terrain:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &-6172204741817407672
 Rigidbody2D:
   serializedVersion: 4

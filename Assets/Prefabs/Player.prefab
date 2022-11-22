@@ -211,13 +211,15 @@ MonoBehaviour:
   m_AirControl: 1
   m_WalkableSurfaces:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 257
   m_CeilingLayer:
     serializedVersion: 2
     m_Bits: 512
   m_GroundCheck: {fileID: 6815979936364106866}
   m_CeilingCheck: {fileID: 6815979936897284399}
   m_CrouchDisableCollider: {fileID: 6815979935899393622}
+  m_SlopeCollider: {fileID: 6815979935899393623}
+  slopeCheckDistance: 0.5
   m_Grounded: 0
   isJumping: 0
   jumpTime: 0.25
@@ -271,7 +273,6 @@ MonoBehaviour:
   animator: {fileID: 8027729895425006645}
   runSpeed: 40
   crouch: 0
-  secondJump: 0
 --- !u!114 &8208591577222564772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +472,7 @@ MonoBehaviour:
   bullet: {fileID: 4377464105645987151, guid: 83060e36d8f652d4aac88aae8badfa94, type: 3}
   key: 108
   animator: {fileID: 8027729895425006645}
-  attackBuffer: 0.5
+  attackBuffer: 0
   cooldownTimer: 0
   attackTimer: 1
   chargedBullet: {fileID: 6559760982362507228, guid: 64e56362c23525b4d898077638bb464c, type: 3}

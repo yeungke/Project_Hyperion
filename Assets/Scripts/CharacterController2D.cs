@@ -6,12 +6,17 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float m_JumpForce = 8f;                            // Amount of force added when the player jumps.
 	[Range(0, 1)][SerializeField] private float m_CrouchSpeed = .4f;            // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;   // How much to smooth out the movement
-	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+	[SerializeField] private bool m_AirControl = true;                          // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WalkableSurfaces;                      // A mask determining the ground relative to the character
 	[SerializeField] private LayerMask m_CeilingLayer;                          // A mask determining a ceiling relative to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
 	[SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+	
+	// Slope Components
+	public CircleCollider2D m_SlopeCollider;                                    // A collider that will disable gravity while on slopes
+	private Vector2 slopeColliderSize;
+	[SerializeField] private float slopeCheckDistance;
 
 	public bool m_Grounded;             // Whether or not the player is grounded.
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -21,7 +26,7 @@ public class CharacterController2D : MonoBehaviour
 	private Vector3 m_Velocity = Vector3.zero;
 
 	[Header("Jump Mechanic Variables")]
-	[Space(10)]
+	[Space(5)]
 	private float jumpTimeCounter;
 	public bool isJumping;
 	[SerializeField] private float jumpTime = 0.25f;
@@ -150,7 +155,8 @@ public class CharacterController2D : MonoBehaviour
 		}
 
 		// If the player jumps while they are in the air, after they are no longer going any higher...
-		if (!m_Grounded && secondJump && jump && m_Rigidbody2D.velocity.y <= 0)
+		if (!m_Grounded && secondJump && jump && m_Rigidbody2D.velocity.y <= 0
+			&& UpgradeManager.instance.IsEnabled(Upgrades.DOUBLEJUMP))
         {
 			// Indicate that the player is jumping, and set the jump time counter again.
 			isJumping = true;
@@ -197,7 +203,26 @@ public class CharacterController2D : MonoBehaviour
 		transform.Rotate(0f, 180f, 0f);
 	}
 
-    private void Start()
+	public void SlopeCheck()
+	{
+		Vector2 checkPosition = transform.position - new Vector3(0, slopeColliderSize.y / 2);
+		SlopeCheckVertical(checkPosition);
+	}
+
+	private void SlopeCheckHorizontal(Vector2 checkPosition)
+	{
+
+	}
+
+	private void SlopeCheckVertical(Vector2 checkPosition)
+	{
+		RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance, m_WalkableSurfaces);
+
+		if (hit)
+			Debug.DrawRay(hit.point, hit.normal, Color.green);
+	}
+
+	private void Start()
     {
 		secondJump = true;
     }
