@@ -46,7 +46,6 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float chargeJumpSpeed;
 	[SerializeField] private float chargeJumpMax;
 	[SerializeField] private float chargeJumpTime;
-	private bool isChargingJump;
 	private bool hasChargeJumped;
 
 	[Header("Events")]
@@ -106,7 +105,7 @@ public class CharacterController2D : MonoBehaviour
 		// Only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
-			// If crouching
+			// If the player is crouching...
 			if (crouch)
 			{
 				if (!m_wasCrouching)
@@ -118,14 +117,11 @@ public class CharacterController2D : MonoBehaviour
 				// Reduce the speed by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
-				if (chargeJumpTime < chargeJumpMax)
+				// While crouching with the Charge Jump upgrade, add to the jump timer if it is less than the cap
+				if (chargeJumpTime < chargeJumpMax && UpgradeManager.instance.IsEnabled(Upgrades.CHARGEJUMP))
 				{
-					isChargingJump = true;
-
-					if (isChargingJump)
-					{
-						chargeJumpTime += Time.deltaTime * chargeJumpSpeed;
-					}
+					// Charge Jump time is calculated by Delta Time and a speed multiplier
+					chargeJumpTime += Time.deltaTime * chargeJumpSpeed;
 				}
 
 				// Disable one of the colliders when crouching
@@ -138,7 +134,6 @@ public class CharacterController2D : MonoBehaviour
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = true;
 
-				isChargingJump = false;
 				chargeJumpTime = 0;
 
 				if (m_wasCrouching)
@@ -200,7 +195,6 @@ public class CharacterController2D : MonoBehaviour
 				// Perform a charge jump; reset the charging jump bool and timer
 				m_Rigidbody2D.velocity = Vector2.up * chargeJumpForce;
 				m_Grounded = false;
-				isChargingJump = false;
 				chargeJumpTime = 0;
 				hasChargeJumped = true;
 			}
@@ -209,7 +203,6 @@ public class CharacterController2D : MonoBehaviour
 				// Perform a normal jump; change the upward velocity of the player.
 				m_Grounded = false;
 				m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
-				isChargingJump = false;
 				chargeJumpTime = 0;
 			}
 		}
