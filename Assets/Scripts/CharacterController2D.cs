@@ -16,7 +16,16 @@ public class CharacterController2D : MonoBehaviour
 	// Slope Components
 	public CircleCollider2D m_SlopeCollider;                                    // A collider that will disable gravity while on slopes
 	private Vector2 slopeColliderSize;
+	private Vector2 slopeNormalPerp;
+	private float slopeDownAngle;
+	private float slopeDownAngleOld;
+	private float slopeSideAngle;
+	private bool isOnSlope;
 	[SerializeField] private float slopeCheckDistance;
+
+	// Slope friction components
+	[SerializeField] PhysicsMaterial2D noFriction;
+	[SerializeField] PhysicsMaterial2D fullFriction;
 
 	public bool m_Grounded;             // Whether or not the player is grounded.
 	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -35,8 +44,10 @@ public class CharacterController2D : MonoBehaviour
 	// Charge Jump
 	[SerializeField] private float chargeJumpForce;
 	[SerializeField] private float chargeJumpSpeed;
+	[SerializeField] private float chargeJumpMax;
 	[SerializeField] private float chargeJumpTime;
-	private bool isCharging;
+	private bool isChargingJump;
+	private bool hasChargeJumped;
 
 	[Header("Events")]
 	[Space]
@@ -80,7 +91,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump, bool jumpHold)
+	public void Move(float move, bool crouch, bool jump, bool jumpHold, float xInput)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -107,6 +118,16 @@ public class CharacterController2D : MonoBehaviour
 				// Reduce the speed by the crouchSpeed multiplier
 				move *= m_CrouchSpeed;
 
+				if (chargeJumpTime < chargeJumpMax)
+				{
+					isChargingJump = true;
+
+					if (isChargingJump)
+					{
+						chargeJumpTime += Time.deltaTime * chargeJumpSpeed;
+					}
+				}
+
 				// Disable one of the colliders when crouching
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = false;
@@ -117,12 +138,35 @@ public class CharacterController2D : MonoBehaviour
 				if (m_CrouchDisableCollider != null)
 					m_CrouchDisableCollider.enabled = true;
 
+				isChargingJump = false;
+				chargeJumpTime = 0;
+
 				if (m_wasCrouching)
 				{
 					m_wasCrouching = false;
 					OnCrouchEvent.Invoke(false);
 				}
 			}
+
+			/*
+			if (m_Grounded && !isOnSlope && !isJumping) // If the player is on flat ground
+            {
+				Vector3 targetVelocity = new Vector2(move * 10f * slopeNormalPerp.x * -xInput, 0.0f);
+				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			}
+			if (m_Grounded && isOnSlope && !isJumping) // If the player is on a slope
+			{
+				Vector3 targetVelocity = new Vector2(move * 10f * slopeNormalPerp.x * -xInput, move * slopeNormalPerp.y * -xInput);
+				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			}
+			else if (!m_Grounded) // If the player is in the air
+			{
+				// Move the character by finding the target velocity
+				Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+				// And then smoothing it out and applying it to the character
+				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			}
+			*/
 
 			// Move the character by finding the target velocity
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
@@ -149,9 +193,25 @@ public class CharacterController2D : MonoBehaviour
 			// Set the bool to indicate that the player is jumping, and set the jump time counter.
 			isJumping = true;
 			jumpTimeCounter = jumpTime;
-			// Change the upward velocity of the player.
-			m_Grounded = false;
-			m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
+
+			// If the player is already crouching and they have a fully charged jump...
+			if (chargeJumpTime >= chargeJumpMax)
+			{
+				// Perform a charge jump; reset the charging jump bool and timer
+				m_Rigidbody2D.velocity = Vector2.up * chargeJumpForce;
+				m_Grounded = false;
+				isChargingJump = false;
+				chargeJumpTime = 0;
+				hasChargeJumped = true;
+			}
+			else
+			{
+				// Perform a normal jump; change the upward velocity of the player.
+				m_Grounded = false;
+				m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
+				isChargingJump = false;
+				chargeJumpTime = 0;
+			}
 		}
 
 		// If the player jumps while they are in the air, after they are no longer going any higher...
@@ -166,10 +226,11 @@ public class CharacterController2D : MonoBehaviour
 			secondJump = false;
         }
 
-		// Reset the second jump after you land on the ground
+		// Reset the second jump and charge jump after you land on the ground
 		if (m_Grounded)
         {
 			secondJump = true;
+			hasChargeJumped = false;
         }
 
 		// When the timer is started, run the timer until it hits 0
@@ -178,19 +239,23 @@ public class CharacterController2D : MonoBehaviour
 		else
 			jumpTimeCounter = 0;
 
-		// If the player holds the jump key while they are in the air...
-		if (isJumping && jumpHold)
+		// If the player has not performed a charge jump...
+		if (!hasChargeJumped)
 		{
-			// Maintain the player's jump velocity so long as the counter is > 0
-			if (jumpTimeCounter > 0)
-				m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
-			// When the timer runs out, end the jump velocity
-			else
+			// If the player holds the jump key while they are in the air...
+			if (isJumping && jumpHold)
+			{
+				// Maintain the player's jump velocity so long as the counter is > 0
+				if (jumpTimeCounter > 0)
+					m_Rigidbody2D.velocity = Vector2.up * m_JumpForce;
+				// When the timer runs out, end the jump velocity
+				else
+					isJumping = false;
+			}
+			// If the player lets go of the jump button, immediately stop the jump velocity
+			else if (isJumping && !jumpHold)
 				isJumping = false;
 		}
-		// If the player lets go of the jump button, immediately stop the jump velocity
-		else if (isJumping && !jumpHold)
-			isJumping = false;
 	}
 
 
@@ -203,23 +268,64 @@ public class CharacterController2D : MonoBehaviour
 		transform.Rotate(0f, 180f, 0f);
 	}
 
-	public void SlopeCheck()
+	public void SlopeCheck(float moveInput)
 	{
 		Vector2 checkPosition = transform.position - new Vector3(0, slopeColliderSize.y / 2);
-		SlopeCheckVertical(checkPosition);
+		SlopeCheckHorizontal(checkPosition);
+		SlopeCheckVertical(checkPosition, moveInput);
 	}
 
 	private void SlopeCheckHorizontal(Vector2 checkPosition)
 	{
+		RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPosition, transform.right, slopeCheckDistance, m_WalkableSurfaces);
+		RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPosition, -transform.right, slopeCheckDistance, m_WalkableSurfaces);
 
+		if (slopeHitFront)
+        {
+			isOnSlope = true;
+			slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+        }
+		else if (slopeHitBack)
+        {
+			isOnSlope = true;
+			slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+		else
+        {
+			slopeSideAngle = 0.0f;
+			isOnSlope = false;
+        }
 	}
 
-	private void SlopeCheckVertical(Vector2 checkPosition)
+	private void SlopeCheckVertical(Vector2 checkPosition, float moveInput)
 	{
 		RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance, m_WalkableSurfaces);
 
 		if (hit)
-			Debug.DrawRay(hit.point, hit.normal, Color.green);
+		{
+			// Retrieve the angle of the ground/slope relative to the player
+			slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;	// Store angle parallel to ground
+			slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);			// Store angle 90 deg to ground
+
+			// Detect if the player is on a slope based on changes in the slope angle
+			if (slopeDownAngle != slopeDownAngleOld)
+            {
+				isOnSlope = true;
+            }
+			slopeDownAngleOld = slopeDownAngle;
+
+			Debug.DrawRay(hit.point, slopeNormalPerp, Color.red);		// Ray cast parallel to ground
+			Debug.DrawRay(hit.point, hit.normal, Color.green);			// Ray cast 90 deg to ground
+		}
+
+		if (isOnSlope && moveInput == 0.0f)
+        {
+			m_Rigidbody2D.sharedMaterial = fullFriction;
+        }
+		else
+        {
+			m_Rigidbody2D.sharedMaterial = noFriction;
+        }
 	}
 
 	private void Start()

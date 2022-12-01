@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34447c76a8dd4a14d96c376289afb472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 600
+  m_JumpForce: 8
   m_CrouchSpeed: 0.4
   m_MovementSmoothing: 0.05
   m_AirControl: 1
@@ -220,12 +220,15 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 6815979935899393622}
   m_SlopeCollider: {fileID: 6815979935899393623}
   slopeCheckDistance: 0.5
-  m_Grounded: 0
+  noFriction: {fileID: 6200000, guid: e595417a7584d2b4ab2a9d0f1a1d1482, type: 2}
+  fullFriction: {fileID: 6200000, guid: bc3539551acf10c43a30473c7d5adadd, type: 2}
+  m_Grounded: 1
   isJumping: 0
   jumpTime: 0.25
   secondJump: 1
-  chargeJumpForce: 0
-  chargeJumpSpeed: 0
+  chargeJumpForce: 100
+  chargeJumpSpeed: 2
+  chargeJumpMax: 5
   chargeJumpTime: 0
   OnLandEvent:
     m_PersistentCalls:
